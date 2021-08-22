@@ -11,7 +11,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
 	title: {

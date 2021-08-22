@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -34,11 +36,25 @@ const Login = () => {
 	const classes = useStyles();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [emailError, setEmailError] = useState(false);
+	const [passwordError, setPasswordError] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		setEmailError(false);
+		setPasswordError(false);
+
+		if (email === "") {
+			setEmailError(true);
+		}
+
+		if (password === "") {
+			setPasswordError(true);
+		}
+
 		if (email && password) {
+			console.log(email, password);
 		}
 	};
 
@@ -65,6 +81,7 @@ const Login = () => {
 							name='email'
 							autoComplete='email'
 							autoFocus
+							error={emailError}
 						/>
 						<TextField
 							value={password}
@@ -78,6 +95,7 @@ const Login = () => {
 							type='password'
 							id='password'
 							autoComplete='current-password'
+							error={passwordError}
 						/>
 						<Button
 							type='submit'
@@ -89,7 +107,8 @@ const Login = () => {
 						</Button>
 
 						<Link
-							href='/register'
+							component={RouterLink}
+							to='/register'
 							variant='body2'
 							className={classes.link}>
 							{"Don't have an account? Register Here"}
