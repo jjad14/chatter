@@ -61,7 +61,7 @@ const Login = () => {
 	return (
 		<Container component='main' maxWidth='md'>
 			<Card className={classes.card}>
-				<Typography component='h1' variant='h5'>
+				<Typography component='h1' variant='h4'>
 					Login
 				</Typography>
 				<CardContent>
