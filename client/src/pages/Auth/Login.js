@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -9,6 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+
+import api from "../../utils/api";
+import { UserContext } from "../../contexts/UserContext";
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -39,6 +42,12 @@ const Login = () => {
 	const [emailError, setEmailError] = useState(false);
 	const [passwordError, setPasswordError] = useState(false);
 
+	const { setUser } = useContext(UserContext);
+
+	const history = useHistory();
+
+	useEffect(() => {}, []);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -54,7 +63,19 @@ const Login = () => {
 		}
 
 		if (email && password) {
-			console.log(email, password);
+			api.post("/user/login", {
+				email,
+				password
+			})
+				.then((res) => {
+					// save user to context
+					setUser(res.data);
+					// redirect user to home page
+					history.push("/");
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	};
 

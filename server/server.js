@@ -7,7 +7,6 @@ import colors from "colors";
 import session from "express-session";
 
 import connectDB from "./data/db.js";
-import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 import { notFound, errorHandler } from "./middleware/errors.js";
 
@@ -39,7 +38,6 @@ app.use(
 
 // Define Routes
 app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoutes);
 
 // error middleware
 app.use(notFound);

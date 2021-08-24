@@ -8,7 +8,7 @@ const cookieOptions = {
 	httpOnly: true,
 	secure: true,
 	sameSite: "Strict", // Strict | Lax | None
-	maxAge: 24 * 60 * 60 // 1 day
+	maxAge: 24 * 60 * 60 * 1000 // 1 day
 };
 
 // GET api/users/login
@@ -41,12 +41,12 @@ const authUser = asyncHandler(async (req, res) => {
 	res.cookie("Bearer", token, cookieOptions);
 
 	// return user info
-	// TODO: return image as well, change name to userName
+	// TODO: return image as well
 	return res.json({
 		_id: user._id,
-		name: user.name,
+		userName: user.userName,
 		email: user.email,
-		isAdmin: user.isAdmin
+		image: "default image"
 	});
 });
 
@@ -54,12 +54,12 @@ const authUser = asyncHandler(async (req, res) => {
 // Register a new user
 // Public Access
 const registerUser = asyncHandler(async (req, res) => {
-	const { email, password, name } = req.body;
+	const { userName, email, password } = req.body;
 
 	// create a user object
 	// create is basically syntactic sugar for the save method
 	const user = await User.create({
-		name,
+		userName,
 		email,
 		password // hashed in user model
 	});
@@ -73,9 +73,9 @@ const registerUser = asyncHandler(async (req, res) => {
 	// return user info
 	return res.status(201).json({
 		_id: user._id,
-		name: user.name,
+		userName: user.userName,
 		email: user.email,
-		isAdmin: user.isAdmin
+		image: "default image"
 	});
 });
 
@@ -86,9 +86,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
 	// user is added to req object by authMiddleWare
 	res.json({
 		_id: req.user._id,
-		name: req.user.name,
-		email: req.user.email,
-		isAdmin: req.user.isAdmin
+		userName: req.user.userName,
+		email: req.user.email
 	});
 });
 
@@ -96,9 +95,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // Update the users profile
 // Private access
 const updateUserProfile = asyncHandler(async (req, res) => {
-	const { name, email, password } = req.body;
+	const { userName, email, password } = req.body;
 
-	if (name) req.user.name = name;
+	if (userName) req.user.userName = userName;
 	if (email) req.user.email = email;
 	if (password) req.user.password = password;
 
@@ -106,9 +105,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 	res.json({
 		_id: req.user._id,
-		name: req.user.name,
-		email: req.user.email,
-		isAdmin: req.user.isAdmin
+		userName: req.user.userName,
+		email: req.user.email
 	});
 });
 

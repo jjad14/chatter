@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: "row"
 	},
 	gridContainer: {
-		flexGrow: 2
+		flexGrow: 3
 	},
 	title: {
 		marginBottom: theme.spacing(2),

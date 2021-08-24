@@ -2,7 +2,7 @@ import { body, validationResult } from "express-validator";
 
 // validation middleware for updating a user
 const validateUser = [
-	body("name", "A Name is required").not().isEmpty(),
+	body("userName", "A UserName is required").not().isEmpty(),
 	body("email", "A valid email is required").isEmail(),
 	body(
 		"password",

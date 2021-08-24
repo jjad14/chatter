@@ -4,12 +4,11 @@ import User from "../models/User.js";
 
 // Validation middleware for registrating a user
 const validateRegistration = [
-	body("name", "A Name is required").not().isEmpty(),
+	body("userName", "A Name is required").not().isEmpty(),
 	body("email", "A valid email is required").isEmail(),
-	body(
-		"password",
-		"A valid password with a min of 6 characters is required"
-	).isLength({ min: 6 }),
+	body("password", "Password must have a minimum of 6 characters").isLength({
+		min: 6
+	}),
 	body("confirmPassword").custom((value, { req }) => {
 		if (value !== req.body.password) {
 			throw new Error("Passwords do not match. Please try again.");
