@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,6 +21,8 @@ import ComputerIcon from "@material-ui/icons/Computer";
 import PublicIcon from "@material-ui/icons/Public";
 import StarIcon from "@material-ui/icons/Star";
 import SettingsIcon from "@material-ui/icons/Settings";
+
+import { UserContext } from "../../contexts/UserContext";
 
 // If changing, must change it also in NavBar.js
 const drawerWidth = 240;
@@ -53,6 +55,8 @@ const SideDrawer = () => {
 	const classes = useStyles();
 	const history = useHistory();
 	const location = useLocation();
+
+	const { user } = useContext(UserContext);
 
 	const menuItems = [
 		{
@@ -107,7 +111,7 @@ const SideDrawer = () => {
 				<Typography variant='h5' className={classes.title}>
 					<Link
 						component={RouterLink}
-						to='/'
+						to={user ? "/" : "/login"}
 						underline='none'
 						color='textPrimary'>
 						<ChatOutlinedIcon /> Chatter
@@ -120,6 +124,7 @@ const SideDrawer = () => {
 					<ListItem
 						key={item.text}
 						button
+						disabled={user === null}
 						onClick={() => history.push(item.path)}
 						className={
 							location.pathname === item.path
@@ -135,6 +140,7 @@ const SideDrawer = () => {
 				<ListItem
 					button
 					onClick={() => history.push("/settings")}
+					disabled={user === null}
 					className={classes.settings}>
 					<ListItemIcon>
 						<SettingsIcon />

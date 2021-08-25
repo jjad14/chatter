@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => {
 		appbar: {
 			width: `calc(100% - ${drawerWidth}px)`
 		},
+		appbarNoDrawer: {
+			width: "100%"
+		},
 		header: {
 			flexGrow: 1
 		},
@@ -55,7 +58,10 @@ const NavBar = () => {
 	};
 
 	return (
-		<AppBar className={classes.appbar} elevation={1} color='secondary'>
+		<AppBar
+			className={user ? classes.appbar : classes.appbarNoDrawer}
+			elevation={1}
+			color='secondary'>
 			<Toolbar>
 				<Box
 					component='div'
@@ -66,26 +72,31 @@ const NavBar = () => {
 
 				{/* Hide when user is authenticated - display user icon dropdown */}
 				<Typography className={classes.links}>
-					<Link
-						className={classes.link}
-						component={RouterLink}
-						to='/login'
-						color='inherit'>
-						Login
-					</Link>
-					<Link
-						className={classes.link}
-						component={RouterLink}
-						to='/register'
-						color='inherit'>
-						Register
-					</Link>
-					<Button
-						className={classes.link}
-						color='inherit'
-						onClick={handleLogout}>
-						Logout
-					</Button>
+					{user ? (
+						<Button
+							className={classes.link}
+							color='inherit'
+							onClick={handleLogout}>
+							Logout
+						</Button>
+					) : (
+						<>
+							<Link
+								className={classes.link}
+								component={RouterLink}
+								to='/login'
+								color='inherit'>
+								Login
+							</Link>
+							<Link
+								className={classes.link}
+								component={RouterLink}
+								to='/register'
+								color='inherit'>
+								Register
+							</Link>
+						</>
+					)}
 				</Typography>
 			</Toolbar>
 		</AppBar>

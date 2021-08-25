@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,8 +52,6 @@ const Register = () => {
 	const { setUser } = useContext(UserContext);
 
 	const history = useHistory();
-
-	useEffect(() => {}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
