@@ -41,8 +41,13 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const ChatRoom = () => {
+const ChatRoom = ({ match }) => {
 	const classes = useStyles();
+	const [room, setRoom] = useState("");
+
+	useEffect(() => {
+		setRoom(match.params.room);
+	}, [match.params.room]);
 
 	return (
 		<div className={classes.root}>
@@ -50,7 +55,7 @@ const ChatRoom = () => {
 				<Grid container>
 					<Grid item xs={12}>
 						<Typography variant='h5' className={classes.title}>
-							Chat Room Name
+							{room}
 						</Typography>
 					</Grid>
 				</Grid>
