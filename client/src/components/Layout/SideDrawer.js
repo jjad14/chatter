@@ -62,42 +62,42 @@ const SideDrawer = () => {
 		{
 			text: "General",
 			icon: <StarIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=general"
 		},
 		{
 			text: "Sports",
 			icon: <SportsFootballIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=sports"
 		},
 		{
 			text: "Movies",
 			icon: <TheatersIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=movies"
 		},
 		{
 			text: "Books",
 			icon: <MenuBookIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=books"
 		},
 		{
 			text: "Politics",
 			icon: <PublicIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=politics"
 		},
 		{
 			text: "Video Games",
 			icon: <SportsEsportsIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=videogames"
 		},
 		{
 			text: "Music",
 			icon: <MusicNoteIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room=music"
 		},
 		{
 			text: "Technology",
 			icon: <ComputerIcon color='secondary' />,
-			path: "/chat"
+			path: "/chat?room="
 		}
 	];
 

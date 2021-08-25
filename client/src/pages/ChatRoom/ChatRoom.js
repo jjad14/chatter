@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -62,14 +63,14 @@ const ChatRoom = () => {
 						<List className={classes.messageArea}></List>
 						<Divider />
 						<Grid container style={{ padding: "20px" }}>
-							<Grid item xs={10}>
+							<Grid item xs={11}>
 								<TextField
 									id='outlined-basic-email'
 									label='Type Something'
 									fullWidth
 								/>
 							</Grid>
-							<Grid xs={2} align='right'>
+							<Grid item xs={1} align='right'>
 								{/* onClick, submit message */}
 								<IconButton
 									aria-label='send'
