@@ -48,7 +48,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (user) {
-			history.push("/");
+			history.push("/home");
 		}
 	}, [user, history]);
 
@@ -75,7 +75,7 @@ const Login = () => {
 					// save user to context
 					setUser(res.data);
 					// redirect user to home page
-					history.push("/");
+					history.push("/home");
 				})
 				.catch((err) => {
 					console.log(err);

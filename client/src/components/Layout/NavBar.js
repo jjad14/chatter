@@ -51,7 +51,7 @@ const NavBar = () => {
 				// remove user from context
 				setUser(null);
 				// redirect user to home page
-				history.push("/login");
+				history.push("/");
 			})
 			.catch((err) => {
 				console.log(err);
@@ -77,7 +77,7 @@ const NavBar = () => {
 						<Typography variant='h5' className={classes.title}>
 							<Link
 								component={RouterLink}
-								to={user ? "/" : "/login"}
+								to='/'
 								underline='none'
 								color='inherit'>
 								<ChatOutlinedIcon /> Chatter

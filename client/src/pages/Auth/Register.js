@@ -55,7 +55,7 @@ const Register = () => {
 
 	useEffect(() => {
 		if (user) {
-			history.push("/");
+			history.push("/home");
 		}
 	}, [user, history]);
 
@@ -100,7 +100,7 @@ const Register = () => {
 					setUser(res.data);
 
 					// redirect user to home page
-					history.push("/");
+					history.push("/home");
 				})
 				.catch((err) => {
 					console.log(err);

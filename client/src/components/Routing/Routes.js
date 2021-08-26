@@ -8,6 +8,7 @@ import ChatRoom from "../../pages/ChatRoom/ChatRoom";
 import Settings from "../../pages/Settings/Settings";
 import Profile from "../../pages/Profile/Profile";
 import Home from "../../pages/Home/Home";
+import LandingPage from "../../pages/LandingPage/LandingPage";
 
 const Routes = () => {
 	return (
@@ -22,8 +23,9 @@ const Routes = () => {
 				<PrivateRoute path='/chat' component={ChatRoom} />
 				<PrivateRoute path='/profile' component={Profile} />
 				<PrivateRoute path='/settings' component={Settings} />
+				<PrivateRoute path='/home' component={Home} />
 				<Route exact path='/'>
-					<Home />
+					<LandingPage />
 				</Route>
 			</Switch>
 		</>

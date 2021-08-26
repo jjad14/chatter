@@ -81,6 +81,7 @@ const Home = () => {
 							align='right'
 							gutterBottom>
 							Start chattering now! Join a room or create your own
+							today!
 						</Typography>
 					</CardContent>
 				</Card>

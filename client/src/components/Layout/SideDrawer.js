@@ -97,7 +97,7 @@ const SideDrawer = () => {
 		{
 			text: "Technology",
 			icon: <ComputerIcon color='secondary' />,
-			path: "/chat?room="
+			path: "/chat?room=technology"
 		}
 	];
 
@@ -111,7 +111,7 @@ const SideDrawer = () => {
 				<Typography variant='h5' className={classes.title}>
 					<Link
 						component={RouterLink}
-						to={user ? "/" : "/login"}
+						to={user ? "/home" : "/login"}
 						underline='none'
 						color='textPrimary'>
 						<ChatOutlinedIcon /> Chatter
