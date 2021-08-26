@@ -8,6 +8,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 
 import api from "../../utils/api";
 import { UserContext } from "../../contexts/UserContext";
@@ -57,6 +58,9 @@ const NavBar = () => {
 			});
 	};
 
+	if (user) {
+	}
+
 	return (
 		<AppBar
 			className={user ? classes.appbar : classes.appbarNoDrawer}
@@ -67,7 +71,19 @@ const NavBar = () => {
 					component='div'
 					display={{ xs: "none", md: "block" }}
 					className={classes.header}>
-					<Typography>Make friends, Share and Laugh!</Typography>
+					{user ? (
+						<Typography>Welcome {user.userName}</Typography>
+					) : (
+						<Typography variant='h5' className={classes.title}>
+							<Link
+								component={RouterLink}
+								to={user ? "/" : "/login"}
+								underline='none'
+								color='inherit'>
+								<ChatOutlinedIcon /> Chatter
+							</Link>
+						</Typography>
+					)}
 				</Box>
 
 				{/* Hide when user is authenticated - display user icon dropdown */}

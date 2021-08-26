@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,13 +23,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Settings = () => {
 	const classes = useStyles();
+
 	const [darkMode, setDarkMode] = useState(false);
-	const { setTheme } = useContext(CustomThemeContext);
+	const { currentTheme, setTheme } = useContext(CustomThemeContext);
+
+	useEffect(() => {
+		if (currentTheme === "darkTheme") {
+			setDarkMode(true);
+		}
+	}, [currentTheme, setDarkMode]);
 
 	const handleThemeChange = (e) => {
 		if (e.target.checked) {
 			setTheme("darkTheme");
-			setDarkMode(e.target.checked);
+			setDarkMode(true);
 		} else {
 			setTheme("lightTheme");
 			setDarkMode(false);
