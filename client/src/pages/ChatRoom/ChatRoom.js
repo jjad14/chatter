@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
 		height: "70vh",
 		overflowY: "auto"
 	},
+	form: {
+		width: "100%"
+	},
 	send: {
 		marginLeft: theme.spacing(1)
 	},
@@ -41,13 +44,31 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const ChatRoom = ({ match }) => {
+const ChatRoom = ({ location }) => {
 	const classes = useStyles();
+
 	const [room, setRoom] = useState("");
+	const [users, setUsers] = useState([]);
+	const [messages, setMessages] = useState([]);
+	const [message, setMessage] = useState("");
 
 	useEffect(() => {
-		setRoom(match.params.room);
-	}, [match.params.room]);
+		let params = new URLSearchParams(location.search);
+
+		setRoom(params.get("room"));
+	}, [location, setRoom]);
+
+	const capitalize = (str) => {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		console.log(message);
+
+		setMessage("");
+	};
 
 	return (
 		<div className={classes.root}>
@@ -55,7 +76,7 @@ const ChatRoom = ({ match }) => {
 				<Grid container>
 					<Grid item xs={12}>
 						<Typography variant='h5' className={classes.title}>
-							{room}
+							Welcome to the {capitalize(room)} room
 						</Typography>
 					</Grid>
 				</Grid>
@@ -67,24 +88,31 @@ const ChatRoom = ({ match }) => {
 						{/* Messages here */}
 						<List className={classes.messageArea}></List>
 						<Divider />
-						<Grid container style={{ padding: "20px" }}>
-							<Grid item xs={11}>
-								<TextField
-									id='outlined-basic-email'
-									label='Type Something'
-									fullWidth
-								/>
+						<form className={classes.form} onSubmit={handleSubmit}>
+							<Grid container style={{ padding: "15px" }}>
+								<Grid item xs={11}>
+									<TextField
+										id='outlined-basic-email'
+										label='Type Something'
+										value={message}
+										onChange={(e) =>
+											setMessage(e.target.value)
+										}
+										fullWidth
+									/>
+								</Grid>
+								<Grid item xs={1} align='right'>
+									{/* onClick, submit message */}
+									<IconButton
+										aria-label='send'
+										color='secondary'
+										type='submit'
+										className={classes.send}>
+										<SendIcon />
+									</IconButton>
+								</Grid>
 							</Grid>
-							<Grid item xs={1} align='right'>
-								{/* onClick, submit message */}
-								<IconButton
-									aria-label='send'
-									color='secondary'
-									className={classes.send}>
-									<SendIcon />
-								</IconButton>
-							</Grid>
-						</Grid>
+						</form>
 					</Grid>
 				</Grid>
 			</div>

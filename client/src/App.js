@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import Routes from "./components/Routing/Routes";
+import Routes from "./Routes";
 import Layout from "./components/Layout/Layout";
 import { UserContext } from "./contexts/UserContext";
 import api from "./utils/api";

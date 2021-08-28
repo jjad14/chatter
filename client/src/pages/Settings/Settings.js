@@ -7,6 +7,8 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Switch from "@material-ui/core/Switch";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
@@ -50,18 +52,25 @@ const Settings = () => {
 					Settings
 				</Typography>
 				<CardContent>
-					<FormGroup>
-						<FormControlLabel
-							control={
-								<Switch
-									checked={darkMode}
-									onChange={(e) => handleThemeChange(e)}
-									name='dark-mode'
+					<FormControl component='fieldset'>
+						<FormLabel component='legend'>Toggle Theme</FormLabel>
+						<FormGroup>
+							<span>
+								<FormControlLabel
+									control={
+										<Switch
+											checked={darkMode}
+											onChange={(e) =>
+												handleThemeChange(e)
+											}
+											name='dark-mode'
+										/>
+									}
+									label='Dark Mode'
 								/>
-							}
-							label='Dark Mode'
-						/>
-					</FormGroup>
+							</span>
+						</FormGroup>
+					</FormControl>
 				</CardContent>
 			</Card>
 		</Container>

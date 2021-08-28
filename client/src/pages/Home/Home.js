@@ -80,7 +80,7 @@ const Home = () => {
 							variant='h6'
 							align='right'
 							gutterBottom>
-							Start chattering now! Join a room or create your own
+							Start chattering now! Join or create your own room
 							today!
 						</Typography>
 					</CardContent>

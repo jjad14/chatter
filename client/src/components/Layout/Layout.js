@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SideDrawer from "./SideDrawer";
 import NavBar from "./NavBar";
 import { UserContext } from "../../contexts/UserContext";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => {
 	return {
@@ -14,6 +15,10 @@ const useStyles = makeStyles((theme) => {
 		page: {
 			width: "100%",
 			padding: theme.spacing(3)
+		},
+		page2: {
+			// mainly for landing page
+			width: "100%"
 		},
 		toolbar: theme.mixins.toolbar
 	};
@@ -32,9 +37,10 @@ const Layout = ({ children }) => {
 			{/* Side drawer */}
 			{user && <SideDrawer />}
 
-			<div className={classes.page}>
+			<div className={user ? classes.page : classes.page2}>
 				<div className={classes.toolbar}></div>
 				{children}
+				<Footer />
 			</div>
 		</div>
 	);
