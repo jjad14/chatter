@@ -1,13 +1,24 @@
 import { createTheme } from "@material-ui/core/styles";
-import { blue, grey } from "@material-ui/core/colors";
+import { blue, grey, red, black } from "@material-ui/core/colors";
 
 const lightTheme = createTheme({
 	palette: {
-		primary: grey,
-		secondary: blue,
+		primary: {
+			light: "#63a4ff",
+			main: "#1976d2",
+			dark: "#004ba0",
+			contrastText: "#fff"
+		},
+		secondary: {
+			light: "#718792",
+			main: "#455a64",
+			dark: "#1c313a",
+			contrastText: "#ffffff"
+		},
 		background: {
 			default: "#eeeeee"
-		}
+		},
+		type: "light"
 	},
 	typography: {
 		fontFamily: "Quicksand",

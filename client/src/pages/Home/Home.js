@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -56,6 +58,23 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
 	const classes = useStyles();
 
+	const [createdRoom, setCreatedRoom] = useState("");
+	const [joinedRoom, setJoinedRoom] = useState("");
+
+	const history = useHistory();
+
+	const createRoomHandler = (e) => {
+		e.preventDefault();
+
+		history.push("/chat?room=" + createdRoom);
+	};
+
+	const joinRoomHandler = (e) => {
+		e.preventDefault();
+
+		history.push("/chat?room=" + joinedRoom);
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.message}>
@@ -97,6 +116,7 @@ const Home = () => {
 							Create a Room
 						</Typography>
 						<form
+							onSubmit={createRoomHandler}
 							className={classes.form}
 							noValidate
 							autoComplete='off'>
@@ -104,10 +124,13 @@ const Home = () => {
 								id='outlined-basic'
 								label='Create Room'
 								variant='outlined'
+								value={createdRoom}
+								onChange={(e) => setCreatedRoom(e.target.value)}
 							/>
 							<Button
+								type='submit'
 								variant='contained'
-								color='secondary'
+								color='primary'
 								className={classes.button}>
 								Create
 							</Button>
@@ -125,6 +148,7 @@ const Home = () => {
 						</Typography>
 
 						<form
+							onSubmit={joinRoomHandler}
 							className={classes.form}
 							noValidate
 							autoComplete='off'>
@@ -132,10 +156,13 @@ const Home = () => {
 								id='outlined-basic'
 								label='Join Room'
 								variant='outlined'
+								value={joinedRoom}
+								onChange={(e) => setJoinedRoom(e.target.value)}
 							/>
 							<Button
+								type='submit'
 								variant='contained'
-								color='secondary'
+								color='primary'
 								className={classes.button}>
 								Join
 							</Button>

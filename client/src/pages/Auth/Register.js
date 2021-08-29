@@ -12,6 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 import api from "../../utils/api";
 import { UserContext } from "../../contexts/UserContext";
+import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -50,7 +51,9 @@ const Register = () => {
 	const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
 	const { user, setUser } = useContext(UserContext);
+	const { currentTheme } = useContext(CustomThemeContext);
 
+	const theme = currentTheme === "lightTheme" ? true : false;
 	const history = useHistory();
 
 	useEffect(() => {
@@ -191,7 +194,7 @@ const Register = () => {
 							type='submit'
 							fullWidth
 							variant='contained'
-							color='secondary'
+							color='primary'
 							className={classes.submit}>
 							Sign Up
 						</Button>
@@ -200,6 +203,7 @@ const Register = () => {
 							component={RouterLink}
 							to='/login'
 							variant='body2'
+							color={theme ? "primary" : "textPrimary"}
 							className={classes.link}>
 							{"Already have an account? Login here"}
 						</Link>

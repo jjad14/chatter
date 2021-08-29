@@ -3,8 +3,18 @@ import { blue, grey } from "@material-ui/core/colors";
 
 const darkTheme = createTheme({
 	palette: {
-		primary: grey,
-		secondary: blue,
+		primary: {
+			light: "#4f5b62",
+			main: "#263238",
+			dark: "#000a12",
+			contrastText: "#ffffff"
+		},
+		secondary: {
+			light: "#6d6d6d",
+			main: "#424242",
+			dark: "#1b1b1b",
+			contrastText: "#ffffff"
+		},
 		background: {
 			default: "#616161"
 		},

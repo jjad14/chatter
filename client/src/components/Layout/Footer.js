@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
 		maxHeight: "50px",
 		backgroundColor:
 			theme.palette.type === "light"
-				? theme.palette.secondary.main
-				: theme.palette.secondary.dark
+				? theme.palette.primary.main
+				: theme.palette.primary.dark
 	}
 }));
 

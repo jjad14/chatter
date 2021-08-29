@@ -53,12 +53,15 @@ const Settings = () => {
 				</Typography>
 				<CardContent>
 					<FormControl component='fieldset'>
-						<FormLabel component='legend'>Toggle Theme</FormLabel>
+						<FormLabel component='legend' color='textPrimary'>
+							Toggle Theme
+						</FormLabel>
 						<FormGroup>
 							<span>
 								<FormControlLabel
 									control={
 										<Switch
+											color='textPrimary'
 											checked={darkMode}
 											onChange={(e) =>
 												handleThemeChange(e)

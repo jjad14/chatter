@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -12,6 +12,8 @@ import SendIcon from "@material-ui/icons/Send";
 import Hidden from "@material-ui/core/Hidden";
 
 import UserList from "./UserList";
+
+import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -51,6 +53,10 @@ const ChatRoom = ({ location }) => {
 	const [users, setUsers] = useState([]);
 	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState("");
+
+	const { currentTheme } = useContext(CustomThemeContext);
+
+	const theme = currentTheme === "lightTheme" ? true : false;
 
 	useEffect(() => {
 		let params = new URLSearchParams(location.search);
@@ -105,7 +111,9 @@ const ChatRoom = ({ location }) => {
 									{/* onClick, submit message */}
 									<IconButton
 										aria-label='send'
-										color='secondary'
+										color={
+											theme ? "primary" : "textPrimary"
+										}
 										type='submit'
 										className={classes.send}>
 										<SendIcon />

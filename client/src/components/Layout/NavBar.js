@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,8 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
+import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 
 import api from "../../utils/api";
@@ -23,6 +26,7 @@ const useStyles = makeStyles((theme) => {
 		appbarNoDrawer: {
 			width: "100%"
 		},
+		dropdown: {},
 		header: {
 			flexGrow: 1
 		},
@@ -40,10 +44,20 @@ const useStyles = makeStyles((theme) => {
 
 const NavBar = () => {
 	const classes = useStyles();
+	const history = useHistory();
 
 	const { user, setUser } = useContext(UserContext);
 
-	const history = useHistory();
+	const [anchorEl, setAnchorEl] = useState(false);
+	const open = Boolean(anchorEl);
+
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(false);
+	};
 
 	const handleLogout = () => {
 		api.delete("/user/logout")
@@ -52,28 +66,25 @@ const NavBar = () => {
 				setUser(null);
 				// redirect user to home page
 				history.push("/");
+
+				setAnchorEl(false);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
 
-	if (user) {
-	}
-
 	return (
 		<AppBar
 			className={user ? classes.appbar : classes.appbarNoDrawer}
 			elevation={1}
-			color='secondary'>
+			color='primary'>
 			<Toolbar>
 				<Box
 					component='div'
 					display={{ xs: "none", md: "block" }}
 					className={classes.header}>
-					{user ? (
-						<Typography>Welcome {user.userName}</Typography>
-					) : (
+					{!user && (
 						<Typography variant='h5' className={classes.title}>
 							<Link
 								component={RouterLink}
@@ -86,15 +97,45 @@ const NavBar = () => {
 					)}
 				</Box>
 
-				{/* Hide when user is authenticated - display user icon dropdown */}
 				<Typography className={classes.links}>
 					{user ? (
-						<Button
-							className={classes.link}
-							color='inherit'
-							onClick={handleLogout}>
-							Logout
-						</Button>
+						<div>
+							<IconButton
+								className={classes.dropdown}
+								onClick={handleMenu}
+								size='small'
+								color='inherit'>
+								<span>Welcome {user.userName}</span>&nbsp;
+								<AccountCircle />
+							</IconButton>
+							<Menu
+								id='menu-appbar'
+								anchorEl={anchorEl}
+								anchorOrigin={{
+									vertical: "top",
+									horizontal: "right"
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: "top",
+									horizontal: "right"
+								}}
+								open={open}
+								onClose={handleClose}>
+								<MenuItem
+									onClick={handleClose}
+									component={RouterLink}
+									to='/profile'
+									color='inherit'>
+									Profile
+								</MenuItem>
+								<MenuItem
+									onClick={handleLogout}
+									component='button'>
+									Logout
+								</MenuItem>
+							</Menu>
+						</div>
 					) : (
 						<>
 							<Link

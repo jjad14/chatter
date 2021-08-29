@@ -23,6 +23,7 @@ import StarIcon from "@material-ui/icons/Star";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 import { UserContext } from "../../contexts/UserContext";
+import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
 
 // If changing, must change it also in NavBar.js
 const drawerWidth = 240;
@@ -57,46 +58,53 @@ const SideDrawer = () => {
 	const location = useLocation();
 
 	const { user } = useContext(UserContext);
+	const { currentTheme } = useContext(CustomThemeContext);
+
+	const theme = currentTheme === "lightTheme" ? true : false;
 
 	const menuItems = [
 		{
 			text: "General",
-			icon: <StarIcon color='secondary' />,
+			icon: <StarIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=general"
 		},
 		{
 			text: "Sports",
-			icon: <SportsFootballIcon color='secondary' />,
+			icon: (
+				<SportsFootballIcon color={theme ? "primary" : "textPrimary"} />
+			),
 			path: "/chat?room=sports"
 		},
 		{
 			text: "Movies",
-			icon: <TheatersIcon color='secondary' />,
+			icon: <TheatersIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=movies"
 		},
 		{
 			text: "Books",
-			icon: <MenuBookIcon color='secondary' />,
+			icon: <MenuBookIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=books"
 		},
 		{
 			text: "Politics",
-			icon: <PublicIcon color='secondary' />,
+			icon: <PublicIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=politics"
 		},
 		{
 			text: "Video Games",
-			icon: <SportsEsportsIcon color='secondary' />,
+			icon: (
+				<SportsEsportsIcon color={theme ? "primary" : "textPrimary"} />
+			),
 			path: "/chat?room=videogames"
 		},
 		{
 			text: "Music",
-			icon: <MusicNoteIcon color='secondary' />,
+			icon: <MusicNoteIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=music"
 		},
 		{
 			text: "Technology",
-			icon: <ComputerIcon color='secondary' />,
+			icon: <ComputerIcon color={theme ? "primary" : "textPrimary"} />,
 			path: "/chat?room=technology"
 		}
 	];
