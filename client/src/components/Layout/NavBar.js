@@ -104,6 +104,7 @@ const NavBar = () => {
 								color='inherit'>
 								<span>Welcome {user.userName}</span>&nbsp;
 								<AccountCircle />
+								{/* TODO: REPLACE ICON ABOVE WILL PROFILE IMAGE - SMALL AND CIRCULAR*/}
 							</IconButton>
 							<Menu
 								id='menu-appbar'

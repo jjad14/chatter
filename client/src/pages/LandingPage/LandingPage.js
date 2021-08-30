@@ -4,9 +4,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import CreateIcon from "@material-ui/icons/Create";
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",

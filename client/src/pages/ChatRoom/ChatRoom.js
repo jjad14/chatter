@@ -51,8 +51,6 @@ const ChatRoom = ({ location }) => {
 	const classes = useStyles();
 
 	const [room, setRoom] = useState("");
-	const [users, setUsers] = useState([]);
-	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState("");
 
 	const { currentTheme } = useContext(CustomThemeContext);

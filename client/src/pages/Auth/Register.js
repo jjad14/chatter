@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +11,6 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-import api from "../../utils/api";
 import { UserContext } from "../../contexts/UserContext";
 import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
 
@@ -33,6 +33,13 @@ const useStyles = makeStyles((theme) => ({
 	link: {
 		display: "block",
 		textAlign: "center"
+	},
+	image: {
+		minWidth: "100px",
+		width: "100px",
+		minHeight: "100px",
+		height: "100px",
+		marginLeft: theme.spacing(2)
 	}
 }));
 
@@ -42,6 +49,7 @@ const Register = () => {
 	const [email, setEmail] = useState("");
 	const [userName, setUserName] = useState("");
 	const [image, setImage] = useState("");
+	const [preview, setPreview] = useState("images/user.png");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -92,12 +100,22 @@ const Register = () => {
 		}
 
 		if (email && userName && password && confirmPassword) {
-			api.post("/user", {
-				email,
-				userName,
-				password,
-				confirmPassword
-			})
+			const formData = new FormData();
+			formData.append("email", email);
+			formData.append("userName", userName);
+			formData.append("image", image);
+			// formData.append("image", URL.revokeObjectURL(image));
+			formData.append("password", password);
+			formData.append("confirmPassword", confirmPassword);
+
+			const config = {
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
+			};
+
+			axios
+				.post("/api/user", formData, config)
 				.then((res) => {
 					// save user to context
 					setUser(res.data);
@@ -109,6 +127,11 @@ const Register = () => {
 					console.log(err);
 				});
 		}
+	};
+
+	const handleImage = (e) => {
+		setPreview(URL.createObjectURL(e.target.files[0]));
+		setImage(e.target.files[0]);
 	};
 
 	return (
@@ -155,12 +178,16 @@ const Register = () => {
 							Upload File
 							<input
 								type='file'
-								accept='image/*'
-								value={image}
-								onChange={(e) => setImage(e.target.value)}
-								hidden
+								accept='.png, .jpg, .jpeg'
+								name='photo'
+								onChange={handleImage}
 							/>
 						</Button>
+						<img
+							src={preview}
+							alt='Profile'
+							className={classes.image}
+						/>
 						<TextField
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}

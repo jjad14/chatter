@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import colors from "colors";
 import session from "express-session";
+import path from "path";
 
 import connectDB from "./data/db.js";
 import userRoutes from "./routes/user.js";
@@ -38,6 +39,13 @@ app.use(
 
 // Define Routes
 app.use("/api/user", userRoutes);
+
+// access __dirname with es6 modules
+const folder = path.resolve();
+
+// make uploads folder static
+// app.use("/uploads", express.static(path.join(folder, "/uploads")));
+app.use("/uploads", express.static("uploads"));
 
 // error middleware
 app.use(notFound);

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import axios from "axios";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,7 +9,6 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-import api from "../../utils/api";
 import { UserContext } from "../../contexts/UserContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
 	link: {
 		display: "block",
 		textAlign: "center"
+	},
+	image: {
+		minWidth: "90px",
+		width: "90px",
+		minHeight: "90px",
+		height: "90px",
+		marginLeft: theme.spacing(2)
 	}
 }));
 
@@ -71,12 +78,20 @@ const Profile = () => {
 		}
 
 		if (email && userName) {
-			api.put("/user/profile", {
-				email,
-				userName,
-				password: newPassword,
-				confirmPassword
-			})
+			const formData = new FormData();
+			formData.append("email", email);
+			formData.append("userName", userName);
+			formData.append("image", image);
+			formData.append("password", newPassword);
+			formData.append("confirmPassword", confirmPassword);
+
+			const config = {
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
+			};
+			axios
+				.put("/api/user/profile", formData, config)
 				.then((res) => {
 					console.log(res);
 					// save user to context
@@ -88,17 +103,22 @@ const Profile = () => {
 		}
 	};
 
+	const handleImage = (e) => {
+		setImage(e.target.files[0]);
+	};
+
 	return (
 		<Container component='main' maxWidth='md'>
 			<Card className={classes.card}>
 				<Typography component='h1' variant='h4'>
-					My Profile
+					Profile Settings
 				</Typography>
 				<CardContent>
 					<form
 						className={classes.form}
 						noValidate
-						onSubmit={handleSubmit}>
+						onSubmit={handleSubmit}
+						encType='multipart/form-data'>
 						<TextField
 							value={userName}
 							onChange={(e) => setUserName(e.target.value)}
@@ -132,12 +152,16 @@ const Profile = () => {
 							Upload File
 							<input
 								type='file'
-								accept='image/*'
-								value={image}
-								onChange={(e) => setImage(e.target.value)}
-								hidden
+								accept='.png, .jpg, .jpeg'
+								name='photo'
+								onChange={handleImage}
 							/>
 						</Button>
+						<img
+							src={user.image}
+							alt={user.userName}
+							className={classes.image}
+						/>
 						<TextField
 							value={newPassword}
 							onChange={(e) => setNewPassword(e.target.value)}

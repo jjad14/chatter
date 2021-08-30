@@ -46,7 +46,7 @@ const authUser = asyncHandler(async (req, res) => {
 		_id: user._id,
 		userName: user.userName,
 		email: user.email,
-		image: "default image"
+		image: user.image
 	});
 });
 
@@ -55,12 +55,13 @@ const authUser = asyncHandler(async (req, res) => {
 // Public Access
 const registerUser = asyncHandler(async (req, res) => {
 	const { userName, email, password } = req.body;
+	const image = req.file ? req.file.path : "/images/user.png";
 
 	// create a user object
-	// create is basically syntactic sugar for the save method
 	const user = await User.create({
 		userName,
 		email,
+		image,
 		password // hashed in user model
 	});
 
@@ -75,7 +76,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		_id: user._id,
 		userName: user.userName,
 		email: user.email,
-		image: "default image"
+		image: user.image
 	});
 });
 
@@ -87,7 +88,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
 	res.json({
 		_id: req.user._id,
 		userName: req.user.userName,
-		email: req.user.email
+		email: req.user.email,
+		image: req.user.image
 	});
 });
 
@@ -96,17 +98,21 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // Private access
 const updateUserProfile = asyncHandler(async (req, res) => {
 	const { userName, email, password } = req.body;
+	// const image = req.file ? req.file.path : "/images/user.png";
+	const image = req.file.path;
 
 	if (userName) req.user.userName = userName;
 	if (email) req.user.email = email;
 	if (password) req.user.password = password;
+	if (image) req.user.image = image;
 
 	await req.user.save();
 
 	res.json({
 		_id: req.user._id,
 		userName: req.user.userName,
-		email: req.user.email
+		email: req.user.email,
+		image: req.user.image
 	});
 });
 
