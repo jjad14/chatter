@@ -65,46 +65,42 @@ const SideDrawer = () => {
 	const menuItems = [
 		{
 			text: "General",
-			icon: <StarIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <StarIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=general"
 		},
 		{
 			text: "Sports",
-			icon: (
-				<SportsFootballIcon color={theme ? "primary" : "textPrimary"} />
-			),
+			icon: <SportsFootballIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=sports"
 		},
 		{
 			text: "Movies",
-			icon: <TheatersIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <TheatersIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=movies"
 		},
 		{
 			text: "Books",
-			icon: <MenuBookIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <MenuBookIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=books"
 		},
 		{
 			text: "Politics",
-			icon: <PublicIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <PublicIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=politics"
 		},
 		{
 			text: "Video Games",
-			icon: (
-				<SportsEsportsIcon color={theme ? "primary" : "textPrimary"} />
-			),
+			icon: <SportsEsportsIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=videogames"
 		},
 		{
 			text: "Music",
-			icon: <MusicNoteIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <MusicNoteIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=music"
 		},
 		{
 			text: "Technology",
-			icon: <ComputerIcon color={theme ? "primary" : "textPrimary"} />,
+			icon: <ComputerIcon color={theme ? "primary" : "inherit"} />,
 			path: "/chat?room=technology"
 		}
 	];

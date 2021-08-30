@@ -8,24 +8,30 @@ import api from "./utils/api";
 
 const App = () => {
 	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
 	useEffect(() => {
-		api.get("/user/profile", {})
+		api.get("/user/profile")
 			.then((res) => {
 				setUser(res.data);
+				setLoading(false);
 			})
-			.catch((err) => {});
+			.catch((err) => {
+				setLoading(false);
+			});
 	}, []);
 
 	return (
 		<UserContext.Provider value={providerValue}>
-			<Router>
-				<Layout>
-					<Routes />
-				</Layout>
-			</Router>
+			{!loading && (
+				<Router>
+					<Layout>
+						<Routes />
+					</Layout>
+				</Router>
+			)}
 		</UserContext.Provider>
 	);
 };

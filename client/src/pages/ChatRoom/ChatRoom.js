@@ -112,9 +112,7 @@ const ChatRoom = ({ location }) => {
 									{/* onClick, submit message */}
 									<IconButton
 										aria-label='send'
-										color={
-											theme ? "primary" : "textPrimary"
-										}
+										color={theme ? "primary" : "inherit"}
 										type='submit'
 										className={classes.send}>
 										<ImageIcon />
@@ -124,9 +122,7 @@ const ChatRoom = ({ location }) => {
 									{/* onClick, submit message */}
 									<IconButton
 										aria-label='send'
-										color={
-											theme ? "primary" : "textPrimary"
-										}
+										color={theme ? "primary" : "inherit"}
 										type='submit'>
 										<SendIcon />
 									</IconButton>

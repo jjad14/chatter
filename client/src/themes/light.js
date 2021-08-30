@@ -1,5 +1,4 @@
 import { createTheme } from "@material-ui/core/styles";
-import { blue, grey, red, black } from "@material-ui/core/colors";
 
 const lightTheme = createTheme({
 	palette: {

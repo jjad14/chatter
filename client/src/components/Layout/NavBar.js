@@ -96,7 +96,7 @@ const NavBar = () => {
 
 				<Typography className={classes.links}>
 					{user ? (
-						<div>
+						<>
 							<IconButton
 								className={classes.dropdown}
 								onClick={handleMenu}
@@ -132,7 +132,7 @@ const NavBar = () => {
 									Logout
 								</MenuItem>
 							</Menu>
-						</div>
+						</>
 					) : (
 						<>
 							<Link
