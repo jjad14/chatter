@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Alert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 
 import { UserContext } from "../../contexts/UserContext";
 
@@ -56,6 +58,9 @@ const Profile = () => {
 	const [passwordError, setPasswordError] = useState(false);
 	const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
+	const [success, setSuccess] = useState(false);
+	const [error, setError] = useState(false);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -93,12 +98,12 @@ const Profile = () => {
 			axios
 				.put("/api/user/profile", formData, config)
 				.then((res) => {
-					console.log(res);
 					// save user to context
 					setUser(res.data);
+					setSuccess(true);
 				})
 				.catch((err) => {
-					console.log(err);
+					setError(true);
 				});
 		}
 	};
@@ -107,8 +112,42 @@ const Profile = () => {
 		setImage(e.target.files[0]);
 	};
 
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setSuccess(false);
+	};
+
 	return (
 		<Container component='main' maxWidth='md'>
+			<Snackbar
+				open={success}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				anchorOrigin={{
+					vertical: "bottom",
+					horizontal: "right"
+				}}>
+				<Alert onClose={handleClose} severity='success'>
+					Profile has been updated
+				</Alert>
+			</Snackbar>
+			<Snackbar
+				open={error}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				anchorOrigin={{
+					vertical: "bottom",
+					horizontal: "right"
+				}}>
+				<Alert onClose={handleClose} severity='error'>
+					Error Updating Profile
+				</Alert>
+			</Snackbar>
+
+			{/* <Alert severity='success'>Profile has been updated!</Alert> */}
 			<Card className={classes.card}>
 				<Typography component='h1' variant='h4'>
 					Profile Settings

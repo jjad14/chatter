@@ -98,8 +98,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // Private access
 const updateUserProfile = asyncHandler(async (req, res) => {
 	const { userName, email, password } = req.body;
-	// const image = req.file ? req.file.path : "/images/user.png";
-	const image = req.file.path;
+	const image = req.file ? req.file.path : req.user.image;
 
 	if (userName) req.user.userName = userName;
 	if (email) req.user.email = email;
