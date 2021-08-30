@@ -80,10 +80,7 @@ const NavBar = () => {
 			elevation={1}
 			color='primary'>
 			<Toolbar>
-				<Box
-					component='div'
-					display={{ xs: "none", md: "block" }}
-					className={classes.header}>
+				<Box component='div' className={classes.header}>
 					{!user && (
 						<Typography variant='h5' className={classes.title}>
 							<Link

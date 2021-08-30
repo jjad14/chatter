@@ -8,8 +8,9 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import SendIcon from "@material-ui/icons/Send";
 import Hidden from "@material-ui/core/Hidden";
+import SendIcon from "@material-ui/icons/Send";
+import ImageIcon from "@material-ui/icons/Image";
 
 import UserList from "./UserList";
 
@@ -82,7 +83,7 @@ const ChatRoom = ({ location }) => {
 				<Grid container>
 					<Grid item xs={12}>
 						<Typography variant='h5' className={classes.title}>
-							Welcome to the {capitalize(room)} room
+							{capitalize(room)} room
 						</Typography>
 					</Grid>
 				</Grid>
@@ -96,7 +97,7 @@ const ChatRoom = ({ location }) => {
 						<Divider />
 						<form className={classes.form} onSubmit={handleSubmit}>
 							<Grid container style={{ padding: "15px" }}>
-								<Grid item xs={11}>
+								<Grid item xs={10}>
 									<TextField
 										id='outlined-basic-email'
 										label='Type Something'
@@ -116,6 +117,17 @@ const ChatRoom = ({ location }) => {
 										}
 										type='submit'
 										className={classes.send}>
+										<ImageIcon />
+									</IconButton>
+								</Grid>
+								<Grid item xs={1} align='right'>
+									{/* onClick, submit message */}
+									<IconButton
+										aria-label='send'
+										color={
+											theme ? "primary" : "textPrimary"
+										}
+										type='submit'>
 										<SendIcon />
 									</IconButton>
 								</Grid>

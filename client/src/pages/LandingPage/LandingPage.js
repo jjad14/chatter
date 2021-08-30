@@ -19,16 +19,16 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(5)
 	},
 	message: {
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down("xs")]: {
 			display: "none"
 		},
-		[theme.breakpoints.up("md")]: {
+		[theme.breakpoints.up("sm")]: {
 			flexGrow: 1,
 			height: "500px"
 		}
 	},
 	cards: {
-		[theme.breakpoints.up("md")]: {
+		[theme.breakpoints.up("sm")]: {
 			display: "flex",
 			flexDirection: "row",
 			justifyContent: "space-evenly",
@@ -37,12 +37,13 @@ const useStyles = makeStyles((theme) => ({
 		}
 	},
 	card: {
-		[theme.breakpoints.down("sm")]: {
-			margin: "10px 50px"
+		[theme.breakpoints.down("xs")]: {
+			margin: "10px 50px",
+			minWidth: "200px",
+			minHeight: "200px"
 		},
-		[theme.breakpoints.up("md")]: {
-			minWidth: "230px",
-			width: "230px",
+		[theme.breakpoints.up("sm")]: {
+			minWidth: "200px",
 			minHeight: "230px"
 		}
 	}
