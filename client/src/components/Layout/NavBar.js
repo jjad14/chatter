@@ -10,8 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Box from "@material-ui/core/Box";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
+import Avatar from "@material-ui/core/Avatar";
 
 import api from "../../utils/api";
 import { UserContext } from "../../contexts/UserContext";
@@ -103,8 +103,11 @@ const NavBar = () => {
 								size='small'
 								color='inherit'>
 								<span>Welcome {user.userName}</span>&nbsp;
-								<AccountCircle />
-								{/* TODO: REPLACE ICON ABOVE WILL PROFILE IMAGE - SMALL AND CIRCULAR*/}
+								<Avatar
+									alt={user.userName}
+									src={user.image}
+									variant='circular'
+								/>
 							</IconButton>
 							<Menu
 								id='menu-appbar'
