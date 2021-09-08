@@ -1,20 +1,20 @@
-import React, { useState, useContext } from "react";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Link from "@material-ui/core/Link";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Box from "@material-ui/core/Box";
-import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
-import Avatar from "@material-ui/core/Avatar";
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import Box from '@material-ui/core/Box';
+import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import Avatar from '@material-ui/core/Avatar';
 
-import api from "../../utils/api";
-import { UserContext } from "../../contexts/UserContext";
+import api from '../../utils/api';
+import { UserContext } from '../../contexts/UserContext';
 
 const drawerWidth = 240;
 
@@ -24,20 +24,20 @@ const useStyles = makeStyles((theme) => {
 			width: `calc(100% - ${drawerWidth}px)`
 		},
 		appbarNoDrawer: {
-			width: "100%"
+			width: '100%'
 		},
 		dropdown: {},
 		header: {
 			flexGrow: 1
 		},
 		links: {
-			display: "flex",
-			justifyContent: "flex-end",
+			display: 'flex',
+			justifyContent: 'flex-end',
 			flexGrow: 1
 		},
 		link: {
 			padding: 5,
-			textTransform: "none"
+			textTransform: 'none'
 		}
 	};
 });
@@ -60,12 +60,12 @@ const NavBar = () => {
 	};
 
 	const handleLogout = () => {
-		api.delete("/user/logout")
+		api.delete('/user/logout')
 			.then(() => {
 				// remove user from context
 				setUser(null);
 				// redirect user to home page
-				history.push("/");
+				history.push('/');
 
 				setAnchorEl(false);
 			})
@@ -113,13 +113,13 @@ const NavBar = () => {
 								id='menu-appbar'
 								anchorEl={anchorEl}
 								anchorOrigin={{
-									vertical: "top",
-									horizontal: "right"
+									vertical: 'top',
+									horizontal: 'right'
 								}}
 								keepMounted
 								transformOrigin={{
-									vertical: "top",
-									horizontal: "right"
+									vertical: 'top',
+									horizontal: 'right'
 								}}
 								open={open}
 								onClose={handleClose}>

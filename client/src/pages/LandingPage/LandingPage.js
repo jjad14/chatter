@@ -1,47 +1,47 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
-		flexDirection: "column"
+		display: 'flex',
+		flexDirection: 'column'
 	},
 	banner: {
-		minHeight: "100%"
+		minHeight: '100%'
 	},
 	bannerContent: {
 		padding: theme.spacing(5)
 	},
 	message: {
-		[theme.breakpoints.down("xs")]: {
-			display: "none"
+		[theme.breakpoints.down('xs')]: {
+			display: 'none'
 		},
-		[theme.breakpoints.up("sm")]: {
+		[theme.breakpoints.up('sm')]: {
 			flexGrow: 1,
-			height: "500px"
+			height: '500px'
 		}
 	},
 	cards: {
-		[theme.breakpoints.up("sm")]: {
-			display: "flex",
-			flexDirection: "row",
-			justifyContent: "space-evenly",
+		[theme.breakpoints.up('sm')]: {
+			display: 'flex',
+			flexDirection: 'row',
+			justifyContent: 'space-evenly',
 			marginTop: theme.spacing(5),
 			flexGrow: 1
 		}
 	},
 	card: {
-		[theme.breakpoints.down("xs")]: {
-			margin: "10px 50px",
-			minWidth: "200px",
-			minHeight: "200px"
+		[theme.breakpoints.down('xs')]: {
+			margin: '10px 50px',
+			minWidth: '200px',
+			minHeight: '200px'
 		},
-		[theme.breakpoints.up("sm")]: {
-			minWidth: "200px",
-			minHeight: "230px"
+		[theme.breakpoints.up('sm')]: {
+			minWidth: '200px',
+			minHeight: '230px'
 		}
 	}
 }));
@@ -105,7 +105,7 @@ const LandingPage = () => {
 							variant='h6'
 							align='center'
 							gutterBottom>
-							Join a Room
+							Meet New People
 						</Typography>
 					</CardContent>
 				</Card>
