@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Box from '@material-ui/core/Box';
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import Avatar from '@material-ui/core/Avatar';
 
 import api from '../../utils/api';
@@ -18,28 +17,28 @@ import { UserContext } from '../../contexts/UserContext';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => {
-	return {
-		appbar: {
-			width: `calc(100% - ${drawerWidth}px)`
-		},
-		appbarNoDrawer: {
-			width: '100%'
-		},
-		dropdown: {},
-		header: {
-			flexGrow: 1
-		},
-		links: {
-			display: 'flex',
-			justifyContent: 'flex-end',
-			flexGrow: 1
-		},
-		link: {
-			padding: 5,
-			textTransform: 'none'
-		}
-	};
+const useStyles = makeStyles({
+	appbar: {
+		width: `calc(100% - ${drawerWidth}px)`
+	},
+	appbarNoDrawer: {
+		width: '100%'
+	},
+	title: {
+		fontWeight: 'bold'
+	},
+	header: {
+		flexGrow: 1
+	},
+	links: {
+		display: 'flex',
+		justifyContent: 'flex-end',
+		flexGrow: 1
+	},
+	link: {
+		padding: 5,
+		textTransform: 'none'
+	}
 });
 
 const NavBar = () => {
@@ -82,13 +81,14 @@ const NavBar = () => {
 			<Toolbar>
 				<Box component='div' className={classes.header}>
 					{!user && (
-						<Typography variant='h5' className={classes.title}>
+						<Typography variant='h5'>
 							<Link
+								className={classes.title}
 								component={RouterLink}
 								to='/'
 								underline='none'
 								color='inherit'>
-								<ChatOutlinedIcon /> Chatter
+								Chatter
 							</Link>
 						</Typography>
 					)}
@@ -102,7 +102,7 @@ const NavBar = () => {
 								onClick={handleMenu}
 								size='small'
 								color='inherit'>
-								<span>Welcome {user.userName}</span>&nbsp;
+								<span>{user.userName}</span>&nbsp;
 								<Avatar
 									alt={user.userName}
 									src={user.image}

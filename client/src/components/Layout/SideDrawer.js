@@ -1,29 +1,28 @@
-import React, { useContext } from "react";
-import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
-import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
-import SportsFootballIcon from "@material-ui/icons/SportsFootball";
-import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import TheatersIcon from "@material-ui/icons/Theaters";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
-import ComputerIcon from "@material-ui/icons/Computer";
-import PublicIcon from "@material-ui/icons/Public";
-import StarIcon from "@material-ui/icons/Star";
-import SettingsIcon from "@material-ui/icons/Settings";
+import SportsFootballIcon from '@material-ui/icons/SportsFootball';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import TheatersIcon from '@material-ui/icons/Theaters';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import ComputerIcon from '@material-ui/icons/Computer';
+import PublicIcon from '@material-ui/icons/Public';
+import StarIcon from '@material-ui/icons/Star';
+import SettingsIcon from '@material-ui/icons/Settings';
 
-import { UserContext } from "../../contexts/UserContext";
-import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
+import { UserContext } from '../../contexts/UserContext';
+import { CustomThemeContext } from '../../contexts/CustomThemeProvider';
 
 // If changing, must change it also in NavBar.js
 const drawerWidth = 240;
@@ -37,17 +36,18 @@ const useStyles = makeStyles((theme) => {
 			width: drawerWidth
 		},
 		title: {
-			display: "block",
-			textAlign: "center",
+			display: 'block',
+			textAlign: 'center',
+			fontWeight: 'bold',
 			padding: theme.spacing(2)
 		},
 		list: {
-			display: "flex",
-			flexDirection: "column",
+			display: 'flex',
+			flexDirection: 'column',
 			flexGrow: 1
 		},
 		settings: {
-			marginTop: "auto"
+			marginTop: 'auto'
 		}
 	};
 });
@@ -60,48 +60,49 @@ const SideDrawer = () => {
 	const { user } = useContext(UserContext);
 	const { currentTheme } = useContext(CustomThemeContext);
 
-	const theme = currentTheme === "lightTheme" ? true : false;
+	const theme = currentTheme === 'lightTheme' ? true : false;
 
+	// TODO: remove once backend works
 	const menuItems = [
 		{
-			text: "General",
-			icon: <StarIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=general"
+			text: 'General',
+			icon: <StarIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/General'
 		},
 		{
-			text: "Sports",
-			icon: <SportsFootballIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=sports"
+			text: 'Sports',
+			icon: <SportsFootballIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Sports'
 		},
 		{
-			text: "Movies",
-			icon: <TheatersIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=movies"
+			text: 'Movies',
+			icon: <TheatersIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Movies'
 		},
 		{
-			text: "Books",
-			icon: <MenuBookIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=books"
+			text: 'Books',
+			icon: <MenuBookIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Books'
 		},
 		{
-			text: "Politics",
-			icon: <PublicIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=politics"
+			text: 'Politics',
+			icon: <PublicIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Politics'
 		},
 		{
-			text: "Video Games",
-			icon: <SportsEsportsIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=videogames"
+			text: 'Video Games',
+			icon: <SportsEsportsIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Videogames'
 		},
 		{
-			text: "Music",
-			icon: <MusicNoteIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=music"
+			text: 'Music',
+			icon: <MusicNoteIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Music'
 		},
 		{
-			text: "Technology",
-			icon: <ComputerIcon color={theme ? "primary" : "inherit"} />,
-			path: "/chat?room=technology"
+			text: 'Technology',
+			icon: <ComputerIcon color={theme ? 'primary' : 'inherit'} />,
+			path: '/chat/Technology'
 		}
 	];
 
@@ -115,10 +116,10 @@ const SideDrawer = () => {
 				<Typography variant='h5' className={classes.title}>
 					<Link
 						component={RouterLink}
-						to={user ? "/home" : "/login"}
+						to={user ? '/home' : '/login'}
 						underline='none'
 						color='textPrimary'>
-						<ChatOutlinedIcon /> Chatter
+						Chatter
 					</Link>
 				</Typography>
 				<Divider />
@@ -143,7 +144,7 @@ const SideDrawer = () => {
 				<Divider />
 				<ListItem
 					button
-					onClick={() => history.push("/settings")}
+					onClick={() => history.push('/settings')}
 					disabled={user === null}
 					className={classes.settings}>
 					<ListItemIcon>

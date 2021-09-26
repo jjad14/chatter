@@ -23,83 +23,8 @@ const useStyles = makeStyles({
 const users = [
 	{
 		id: '1',
-		userName: 'Mike',
-		image: 'https://randomuser.me/api/portraits/women/38.jpg'
-	},
-	{
-		id: '2',
-		userName: 'Amy',
-		image: 'https://randomuser.me/api/portraits/women/39.jpg'
-	},
-	{
-		id: '3',
-		userName: 'Brian',
-		image: 'https://randomuser.me/api/portraits/women/40.jpg'
-	},
-	{
-		id: '4',
-		userName: 'John',
-		image: 'https://randomuser.me/api/portraits/women/41.jpg'
-	},
-	{
-		id: '5',
-		userName: 'Sam',
-		image: 'https://randomuser.me/api/portraits/women/42.jpg'
-	},
-	{
-		id: '6',
-		userName: 'Jim',
-		image: 'https://randomuser.me/api/portraits/women/43.jpg'
-	},
-	{
-		id: '7',
-		userName: 'Kate',
-		image: 'https://randomuser.me/api/portraits/women/44.jpg'
-	},
-	{
-		id: '8',
-		userName: 'Meg',
-		image: 'https://randomuser.me/api/portraits/women/45.jpg'
-	},
-	{
-		id: '9',
-		userName: 'Mike',
-		image: 'https://randomuser.me/api/portraits/women/38.jpg'
-	},
-	{
-		id: '10',
-		userName: 'Amy',
-		image: 'https://randomuser.me/api/portraits/women/39.jpg'
-	},
-	{
-		id: '11',
-		userName: 'Brian',
-		image: 'https://randomuser.me/api/portraits/women/40.jpg'
-	},
-	{
-		id: '12',
-		userName: 'John',
-		image: 'https://randomuser.me/api/portraits/women/41.jpg'
-	},
-	{
-		id: '13',
-		userName: 'Sam',
-		image: 'https://randomuser.me/api/portraits/women/42.jpg'
-	},
-	{
-		id: '14',
-		userName: 'Jim',
-		image: 'https://randomuser.me/api/portraits/women/43.jpg'
-	},
-	{
-		id: '15',
-		userName: 'Kate',
-		image: 'https://randomuser.me/api/portraits/women/44.jpg'
-	},
-	{
-		id: '16',
-		userName: 'Meg',
-		image: 'https://randomuser.me/api/portraits/women/45.jpg'
+		userName: 'jjad14',
+		image: 'https://randomuser.me/api/portraits/men/34.jpg'
 	}
 ];
 
@@ -110,7 +35,7 @@ const UserList = () => {
 		<div className={classes.root}>
 			<Card className={classes.root}>
 				<Typography component='h1' variant='h6' align='center'>
-					Users
+					In Chat
 				</Typography>
 				<Divider />
 				<CardContent
@@ -119,7 +44,7 @@ const UserList = () => {
 					}}>
 					<List className={classes.userArea} disablePadding>
 						{users.map((user) => (
-							<User user={user} />
+							<User key={user.id} user={user} />
 						))}
 					</List>
 				</CardContent>

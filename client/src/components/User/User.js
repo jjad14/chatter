@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 // recieves username, image, id
 const User = ({ user }) => {
 	return (
-		<ListItem key={user.id} button divider alignItems='flex-start'>
+		<ListItem button divider alignItems='flex-start'>
 			<ListItemAvatar>
 				<Avatar
 					alt={user.userName}

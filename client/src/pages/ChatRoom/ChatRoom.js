@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Hidden from "@material-ui/core/Hidden";
+import { useParams } from 'react-router-dom';
 
-import UserList from "../../components/UserList/UserList";
-import ChatBox from "../../components/ChatBox/ChatBox";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
+
+import UserList from '../../components/UserList/UserList';
+import ChatBox from '../../components/ChatBox/ChatBox';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
-		flexDirection: "row"
+		display: 'flex',
+		flexDirection: 'row'
 	},
 	gridContainer: {
 		flexGrow: 3
@@ -22,24 +24,23 @@ const useStyles = makeStyles((theme) => ({
 	},
 	usersCard: {
 		flexGrow: 1,
-		minWidth: "30vh"
+		minWidth: '30vh'
 	}
 }));
 
-const ChatRoom = ({ location }) => {
+const ChatRoom = () => {
 	const classes = useStyles();
+	const [room, setRoom] = useState('');
 
-	const [room, setRoom] = useState("");
+	let { id } = useParams();
 
 	useEffect(() => {
-		let params = new URLSearchParams(location.search);
-
-		setRoom(params.get("room"));
-	}, [location, setRoom]);
+		setRoom(id);
+	}, [id]);
 
 	const capitalize = (str) => {
-		if (str === "videogames") {
-			str = "Video Games";
+		if (str === 'videogames') {
+			str = 'Video Games';
 		}
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	};
@@ -54,7 +55,6 @@ const ChatRoom = ({ location }) => {
 						</Typography>
 					</Grid>
 				</Grid>
-				{/* Chat Box */}
 				<ChatBox />
 			</div>
 			<Hidden mdDown>

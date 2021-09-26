@@ -1,42 +1,36 @@
-import React from "react";
+import React from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		position: "relative",
-		minWidth: "40%",
-		maxWidth: "60%",
-		// border: "1px solid black",
+		position: 'relative',
+		minWidth: '40%',
+		maxWidth: '60%',
 		backgroundColor: (props) =>
 			props.isUser
 				? theme.palette.grey[500]
 				: theme.palette.primary.light,
-		float: (props) => (props.isUser ? "right" : "left"),
+		float: (props) => (props.isUser ? 'right' : 'left'),
 		margin: theme.spacing(1),
-		// margin: (props) => (props.isUser ? "auto" : ""),
-
-		[theme.breakpoints.down("sm")]: {
-			minHeight: "20%"
+		[theme.breakpoints.down('sm')]: {
+			minHeight: '20%'
 		},
-		[theme.breakpoints.up("md")]: {
-			minHeight: "20%"
+		[theme.breakpoints.up('md')]: {
+			minHeight: '20%'
 		}
 	},
 	message: {
-		display: "flex",
+		display: 'flex',
 		padding: theme.spacing(2)
 	},
 	avatarContainer: {
 		marginRight: theme.spacing(1)
-	},
-	contentContainer: {},
-	content: {},
-	userName: {}
+	}
 }));
 
 // single message component

@@ -1,44 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
-import { UserContext } from "../../contexts/UserContext";
-import { CustomThemeContext } from "../../contexts/CustomThemeProvider";
+import { UserContext } from '../../contexts/UserContext';
+import { CustomThemeContext } from '../../contexts/CustomThemeProvider';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
 		marginTop: theme.spacing(5),
 		paddingTop: theme.spacing(2),
 		paddingBottom: theme.spacing(2),
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center"
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center'
 	},
 	form: {
-		width: "50vh",
+		width: '50vh',
 		marginTop: theme.spacing(1)
+	},
+	inputImage: {
+		display: 'flex',
+		flexDirection: 'row'
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2)
 	},
 	link: {
-		display: "block",
-		textAlign: "center"
+		display: 'block',
+		textAlign: 'center'
 	},
 	image: {
-		minWidth: "100px",
-		width: "100px",
-		minHeight: "100px",
-		height: "100px",
+		minWidth: '100px',
+		width: '100px',
+		minHeight: '100px',
+		height: '100px',
 		marginLeft: theme.spacing(2)
 	}
 }));
@@ -46,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
 const Register = () => {
 	const classes = useStyles();
 
-	const [email, setEmail] = useState("");
-	const [userName, setUserName] = useState("");
-	const [image, setImage] = useState("");
-	const [preview, setPreview] = useState("images/user.png");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+	const [email, setEmail] = useState('');
+	const [userName, setUserName] = useState('');
+	const [image, setImage] = useState('');
+	const [preview, setPreview] = useState('images/user.png');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 
 	const [emailError, setEmailError] = useState(false);
 	const [userNameError, setUserNameError] = useState(false);
@@ -61,12 +65,12 @@ const Register = () => {
 	const { user, setUser } = useContext(UserContext);
 	const { currentTheme } = useContext(CustomThemeContext);
 
-	const theme = currentTheme === "lightTheme" ? true : false;
+	const theme = currentTheme === 'lightTheme' ? true : false;
 	const history = useHistory();
 
 	useEffect(() => {
 		if (user) {
-			history.push("/home");
+			history.push('/home');
 		}
 	}, [user, history]);
 
@@ -78,19 +82,19 @@ const Register = () => {
 		setPasswordError(false);
 		setConfirmPasswordError(false);
 
-		if (email === "") {
+		if (email === '') {
 			setEmailError(true);
 		}
 
-		if (userName === "") {
+		if (userName === '') {
 			setUserNameError(true);
 		}
 
-		if (password === "") {
+		if (password === '') {
 			setPasswordError(true);
 		}
 
-		if (confirmPassword === "") {
+		if (confirmPassword === '') {
 			setConfirmPasswordError(true);
 		}
 
@@ -101,27 +105,27 @@ const Register = () => {
 
 		if (email && userName && password && confirmPassword) {
 			const formData = new FormData();
-			formData.append("email", email);
-			formData.append("userName", userName);
-			formData.append("image", image);
+			formData.append('email', email);
+			formData.append('userName', userName);
+			formData.append('image', image);
 			// formData.append("image", URL.revokeObjectURL(image));
-			formData.append("password", password);
-			formData.append("confirmPassword", confirmPassword);
+			formData.append('password', password);
+			formData.append('confirmPassword', confirmPassword);
 
 			const config = {
 				headers: {
-					"Content-Type": "multipart/form-data"
+					'Content-Type': 'multipart/form-data'
 				}
 			};
 
 			axios
-				.post("/api/user", formData, config)
+				.post('/api/user', formData, config)
 				.then((res) => {
 					// save user to context
 					setUser(res.data);
 
 					// redirect user to home page
-					history.push("/home");
+					history.push('/home');
 				})
 				.catch((err) => {
 					console.log(err);
@@ -174,20 +178,21 @@ const Register = () => {
 							error={emailError}
 							helperText='A valid email address is required'
 						/>
-						<Button variant='contained' component='label'>
-							Upload File
-							<input
-								type='file'
-								accept='.png, .jpg, .jpeg'
-								name='photo'
-								onChange={handleImage}
+						<div className={classes.inputImage}>
+							<Button variant='contained' component='label'>
+								<input
+									type='file'
+									accept='.png, .jpg, .jpeg'
+									name='photo'
+									onChange={handleImage}
+								/>
+							</Button>
+							<img
+								src={preview}
+								alt='Profile'
+								className={classes.image}
 							/>
-						</Button>
-						<img
-							src={preview}
-							alt='Profile'
-							className={classes.image}
-						/>
+						</div>
 						<TextField
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
@@ -230,9 +235,9 @@ const Register = () => {
 							component={RouterLink}
 							to='/login'
 							variant='body2'
-							color={theme ? "primary" : "textPrimary"}
+							color={theme ? 'primary' : 'textPrimary'}
 							className={classes.link}>
-							{"Already have an account? Login here"}
+							{'Already have an account? Login here'}
 						</Link>
 					</form>
 				</CardContent>

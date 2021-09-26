@@ -1,53 +1,60 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
-		flexDirection: "column",
+		display: 'flex',
+		flexDirection: 'column',
 		padding: theme.spacing(1)
 	},
 	banner: {
-		// minHeight: "50vh",
-		minHeight: "100%"
+		backgroundImage: `url(/images/background.jpg)`,
+		backgroundPosition: '25% 75%',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		opacity: '0.8',
+		minHeight: '100%'
 	},
 	bannerContent: {
 		padding: theme.spacing(5)
 	},
+	text: {
+		fontWeight: 'bold'
+	},
 	message: {
-		[theme.breakpoints.down("sm")]: {
-			display: "none"
+		[theme.breakpoints.down('sm')]: {
+			display: 'none'
 		},
-		[theme.breakpoints.up("md")]: {
+		[theme.breakpoints.up('md')]: {
 			flexGrow: 1
 		}
 	},
 	form: {
-		display: "flex",
-		flexDirection: "column"
+		display: 'flex',
+		flexDirection: 'column'
 	},
 	choices: {
-		[theme.breakpoints.up("md")]: {
-			display: "flex",
-			flexDirection: "row",
-			justifyContent: "space-evenly",
+		[theme.breakpoints.up('md')]: {
+			display: 'flex',
+			flexDirection: 'row',
+			justifyContent: 'space-evenly',
 			marginTop: theme.spacing(5),
 			flexGrow: 1
 		}
 	},
 	card: {
-		[theme.breakpoints.down("sm")]: {
-			margin: "10px 0px"
+		[theme.breakpoints.down('sm')]: {
+			margin: '10px 0px'
 		},
-		[theme.breakpoints.up("md")]: {
-			minWidth: "300px"
+		[theme.breakpoints.up('md')]: {
+			minWidth: '300px'
 		}
 	},
 	button: {
@@ -58,21 +65,21 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
 	const classes = useStyles();
 
-	const [createdRoom, setCreatedRoom] = useState("");
-	const [joinedRoom, setJoinedRoom] = useState("");
+	const [createdRoom, setCreatedRoom] = useState('');
+	const [joinedRoom, setJoinedRoom] = useState('');
 
 	const history = useHistory();
 
 	const createRoomHandler = (e) => {
 		e.preventDefault();
 
-		history.push("/chat?room=" + createdRoom);
+		history.push('/chat?room=' + createdRoom);
 	};
 
 	const joinRoomHandler = (e) => {
 		e.preventDefault();
 
-		history.push("/chat?room=" + joinedRoom);
+		history.push('/chat?room=' + joinedRoom);
 	};
 
 	return (
@@ -81,6 +88,7 @@ const Home = () => {
 				<Card className={classes.banner}>
 					<CardContent className={classes.bannerContent}>
 						<Typography
+							className={classes.text}
 							color='textPrimary'
 							variant='h2'
 							align='left'
@@ -88,6 +96,7 @@ const Home = () => {
 							Welcome to Chatter
 						</Typography>
 						<Typography
+							className={classes.text}
 							color='textPrimary'
 							variant='h6'
 							align='center'
@@ -95,6 +104,7 @@ const Home = () => {
 							Meet new people, share and laugh.
 						</Typography>
 						<Typography
+							className={classes.text}
 							color='textPrimary'
 							variant='h6'
 							align='right'
@@ -122,7 +132,7 @@ const Home = () => {
 							autoComplete='off'>
 							<TextField
 								id='outlined-basic'
-								label='Create Room'
+								label='Room Name'
 								variant='outlined'
 								value={createdRoom}
 								onChange={(e) => setCreatedRoom(e.target.value)}
@@ -154,7 +164,7 @@ const Home = () => {
 							autoComplete='off'>
 							<TextField
 								id='outlined-basic'
-								label='Join Room'
+								label='Room Name'
 								variant='outlined'
 								value={joinedRoom}
 								onChange={(e) => setJoinedRoom(e.target.value)}

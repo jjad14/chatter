@@ -4,43 +4,46 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import VideocamIcon from '@mui/icons-material/Videocam';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import CreateIcon from '@mui/icons-material/Create';
+import LoginIcon from '@mui/icons-material/Login';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
-		flexDirection: 'column'
+		flexDirection: 'column',
+		justifyContent: 'space-evenly',
+		height: '90vh',
+		backgroundImage: `url(/images/background.jpg)`,
+		backgroundPosition: '25% 75%',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		opacity: '0.9'
 	},
-	banner: {
-		minHeight: '100%'
-	},
-	bannerContent: {
-		padding: theme.spacing(5)
-	},
-	message: {
-		[theme.breakpoints.down('xs')]: {
+	title: {
+		[theme.breakpoints.down('sm')]: {
 			display: 'none'
-		},
-		[theme.breakpoints.up('sm')]: {
-			flexGrow: 1,
-			height: '500px'
 		}
 	},
+	text: {
+		fontWeight: 'bold'
+	},
 	cards: {
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('md')]: {
 			display: 'flex',
 			flexDirection: 'row',
-			justifyContent: 'space-evenly',
-			marginTop: theme.spacing(5),
-			flexGrow: 1
+			justifyContent: 'space-evenly'
 		}
 	},
 	card: {
-		[theme.breakpoints.down('xs')]: {
+		[theme.breakpoints.down('sm')]: {
 			margin: '10px 50px',
 			minWidth: '200px',
 			minHeight: '200px'
 		},
-		[theme.breakpoints.up('sm')]: {
-			minWidth: '200px',
+		[theme.breakpoints.up('md')]: {
+			minWidth: '300px',
 			minHeight: '230px'
 		}
 	}
@@ -51,61 +54,71 @@ const LandingPage = () => {
 
 	return (
 		<div className={classes.root}>
-			<div className={classes.message}>
-				<Card className={classes.banner}>
-					<CardContent className={classes.bannerContent}>
-						<Typography
-							variant='h1'
-							component='h2'
-							gutterBottom
-							align='center'>
-							Chatter
-						</Typography>
-					</CardContent>
-				</Card>
+			<div className={classes.title}>
+				<Typography
+					className={classes.text}
+					color='textPrimary'
+					variant='h2'
+					align='center'
+					gutterBottom>
+					Chatter, meet new people, share and laugh.
+				</Typography>
+				<Typography
+					className={classes.text}
+					color='textPrimary'
+					variant='h4'
+					align='center'
+					gutterBottom>
+					Join or create your own room today! Login to start
+					chattering now!
+				</Typography>
 			</div>
 			<div className={classes.cards}>
 				<Card className={classes.card}>
 					<CardContent>
+						<CreateIcon />
 						<Typography
 							color='textPrimary'
 							variant='h6'
 							align='center'
 							gutterBottom>
-							Create a Room
+							Create your own Room
 						</Typography>
 					</CardContent>
 				</Card>
 				<Card className={classes.card}>
 					<CardContent>
+						<LoginIcon />
 						<Typography
 							color='textPrimary'
 							variant='h6'
 							align='center'
 							gutterBottom>
-							Join a Room
+							Join an Existing Room
 						</Typography>
 					</CardContent>
 				</Card>
 				<Card className={classes.card}>
 					<CardContent>
+						<QuestionAnswerIcon />
 						<Typography
 							color='textPrimary'
 							variant='h6'
 							align='center'
 							gutterBottom>
-							Private Message
+							Private Messaging
 						</Typography>
 					</CardContent>
 				</Card>
 				<Card className={classes.card}>
 					<CardContent>
+						<VideocamIcon fontSize='large' />
 						<Typography
 							color='textPrimary'
 							variant='h6'
 							align='center'
 							gutterBottom>
-							Meet New People
+							Video Calls
 						</Typography>
 					</CardContent>
 				</Card>
