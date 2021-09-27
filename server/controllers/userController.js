@@ -1,13 +1,13 @@
-import asyncHandler from "express-async-handler";
+import asyncHandler from 'express-async-handler';
 
-import generateToken from "../utils/generateToken.js";
-import User from "../models/User.js";
+import generateToken from '../utils/generateToken.js';
+import User from '../models/User.js';
 
 // Cookie Configuration
 const cookieOptions = {
 	httpOnly: true,
 	secure: true,
-	sameSite: "Strict", // Strict | Lax | None
+	sameSite: 'Strict', // Strict | Lax | None
 	maxAge: 24 * 60 * 60 * 1000 // 1 day
 };
 
@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res) => {
 	// user with that email doesnt exist
 	if (!user) {
 		res.status(401);
-		throw new Error("Invalid User Credentials");
+		throw new Error('Invalid User Credentials');
 	}
 
 	// compare req.body and stored hash password
@@ -31,17 +31,16 @@ const authUser = asyncHandler(async (req, res) => {
 
 	if (!match) {
 		res.status(401);
-		throw new Error("Invalid User Credentials");
+		throw new Error('Invalid User Credentials');
 	}
 
 	// generate token
 	const token = generateToken(user._id);
 
 	// set cookie
-	res.cookie("Bearer", token, cookieOptions);
+	res.cookie('Bearer', token, cookieOptions);
 
 	// return user info
-	// TODO: return image as well
 	return res.json({
 		_id: user._id,
 		userName: user.userName,
@@ -55,7 +54,7 @@ const authUser = asyncHandler(async (req, res) => {
 // Public Access
 const registerUser = asyncHandler(async (req, res) => {
 	const { userName, email, password } = req.body;
-	const image = req.file ? req.file.path : "/images/user.png";
+	const image = req.file ? req.file.path : '/images/user.png';
 
 	// create a user object
 	const user = await User.create({
@@ -69,7 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
 	const token = generateToken(user._id);
 
 	// set cookie
-	res.cookie("Bearer", token, cookieOptions);
+	res.cookie('Bearer', token, cookieOptions);
 
 	// return user info
 	return res.status(201).json({
@@ -117,11 +116,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 const logout = (req, res) => {
 	// expire cookie and send back, which will be removed
-	res.cookie("Bearer", "", {
+	res.cookie('Bearer', '', {
 		httpOnly: true,
 		expires: new Date(0),
 		secure: true,
-		sameSite: "none"
+		sameSite: 'none'
 	})
 		.status(204)
 		.send();

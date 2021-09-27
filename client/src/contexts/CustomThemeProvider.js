@@ -1,9 +1,9 @@
-import React, { createContext, useState } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import getTheme from "../themes";
+import React, { createContext, useState } from 'react';
+import { ThemeProvider } from '@material-ui/core/styles';
+import getTheme from '../themes';
 
 export const CustomThemeContext = createContext({
-	currentTheme: "lightTheme",
+	currentTheme: 'lightTheme',
 	setTheme: null
 });
 
@@ -11,7 +11,7 @@ const CustomThemeProvider = (props) => {
 	const { children } = props;
 
 	// Get current theme from localStorage
-	const currentTheme = localStorage.getItem("appTheme") || "lightTheme";
+	const currentTheme = localStorage.getItem('chatter-theme') || 'lightTheme';
 
 	// State to hold selected theme
 	const [themeName, _setThemeName] = useState(currentTheme);
@@ -21,7 +21,7 @@ const CustomThemeProvider = (props) => {
 
 	// Wrap _setThemeName to store new theme names in localStorage
 	const setThemeName = (name) => {
-		localStorage.setItem("appTheme", name);
+		localStorage.setItem('chatter-theme', name);
 		_setThemeName(name);
 	};
 

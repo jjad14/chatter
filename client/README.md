@@ -3,9 +3,9 @@
 React with Hooks and Context API
 Material UI
 
-## Available Scripts
-
 ### Client
+
+## Available Scripts
 
 #### npm install
 

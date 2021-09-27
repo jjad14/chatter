@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import Message from '../Message/Message';
 
 import { CustomThemeContext } from '../../contexts/CustomThemeProvider';
+import { useConversations } from '../../contexts/ConversationProvider';
+import { UserContext } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme) => ({
 	chatSection: {
@@ -43,43 +45,53 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-// props to recieve
-// messages of the current chat
-// chat room name
-
-const ChatBox = (props) => {
+// displays a userlist to display messages and an input box for sending a message
+// recieves the messages array and room as props
+const ChatBox = ({ messages, room }) => {
 	const classes = useStyles();
+	const { user } = useContext(UserContext);
 
-	const [room, setRoom] = useState('');
 	const [message, setMessage] = useState('');
 	const { currentTheme } = useContext(CustomThemeContext);
+	const { sendMessage } = useConversations();
 
 	const theme = currentTheme === 'lightTheme' ? true : false;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(message);
+		if (message !== '') {
+			sendMessage(message, room);
 
-		setMessage('');
+			setMessage('');
+		}
 	};
 
 	return (
 		<Grid container component={Paper} className={classes.chatSection}>
 			<Grid item xs={12}>
-				{/* Messages here */}
 				<List className={classes.messageArea}>
 					<div className={classes.listMessages}>
 						<Message
-							key='1'
-							userName='jjad14'
-							image='https://randomuser.me/api/portraits/men/34.jpg'
-							content='Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Quos blanditiis tenetur unde suscipit, quam beatae
-                            rerum inventore consectetur, neque doloribus, cupiditate
-                            numquam dignissimos laborum fugiat deleniti?'
-							isUser={true}
+							key='welcome-message'
+							userName='chatter-bot'
+							content={`Welcome to the ${room} chat room!`}
+							isUser={false}
 						/>
+						{messages &&
+							messages
+								.sort()
+								.map((message, index) => (
+									<Message
+										key={index}
+										userName={message.sender}
+										image={message.image}
+										content={message.content}
+										isUser={
+											message.sender === user.userName
+										}
+									/>
+								))}
 					</div>
 				</List>
 				<Divider />
@@ -91,7 +103,8 @@ const ChatBox = (props) => {
 								label='Type Something'
 								value={message}
 								inputProps={{
-									maxLength: 180
+									maxLength: 180,
+									minLength: 1
 								}}
 								className={classes.input}
 								onChange={(e) => setMessage(e.target.value)}

@@ -19,17 +19,8 @@ const useStyles = makeStyles({
 	}
 });
 
-// TODO: remove for production
-const users = [
-	{
-		id: '1',
-		userName: 'jjad14',
-		image: 'https://randomuser.me/api/portraits/men/34.jpg'
-	}
-];
-
 // receives list of users as props
-const UserList = () => {
+const UserList = ({ users }) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
@@ -43,9 +34,10 @@ const UserList = () => {
 						padding: '0'
 					}}>
 					<List className={classes.userArea} disablePadding>
-						{users.map((user) => (
-							<User key={user.id} user={user} />
-						))}
+						{users &&
+							users.map((user) => (
+								<User key={user.id} user={user} />
+							))}
 					</List>
 				</CardContent>
 			</Card>

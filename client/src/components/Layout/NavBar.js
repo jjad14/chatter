@@ -69,7 +69,7 @@ const NavBar = () => {
 				setAnchorEl(false);
 			})
 			.catch((err) => {
-				console.log(err);
+				// console.log(err);
 			});
 	};
 

@@ -10,6 +10,8 @@ import Hidden from '@material-ui/core/Hidden';
 import UserList from '../../components/UserList/UserList';
 import ChatBox from '../../components/ChatBox/ChatBox';
 
+import { useConversations } from '../../contexts/ConversationProvider';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
@@ -30,20 +32,19 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatRoom = () => {
 	const classes = useStyles();
+
 	const [room, setRoom] = useState('');
+
+	const { conversation, joinConversation } = useConversations();
 
 	let { id } = useParams();
 
 	useEffect(() => {
 		setRoom(id);
-	}, [id]);
+		joinConversation(id);
 
-	const capitalize = (str) => {
-		if (str === 'videogames') {
-			str = 'Video Games';
-		}
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	};
+		// eslint-disable-next-line
+	}, [id]);
 
 	return (
 		<div className={classes.root}>
@@ -51,15 +52,15 @@ const ChatRoom = () => {
 				<Grid container>
 					<Grid item xs={12}>
 						<Typography variant='h5' className={classes.title}>
-							{capitalize(room)} Room
+							{room} Room
 						</Typography>
 					</Grid>
 				</Grid>
-				<ChatBox />
+				<ChatBox room={room} messages={conversation.messages} />
 			</div>
 			<Hidden mdDown>
 				<div className={classes.usersCard}>
-					<UserList />
+					<UserList users={conversation.users} />
 				</div>
 			</Hidden>
 		</div>

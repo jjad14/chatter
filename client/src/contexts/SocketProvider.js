@@ -11,6 +11,8 @@ export function useSocket() {
 	return useContext(SocketContext);
 }
 
+// stores socket in context for app-wide usage
+// only create a socket if user is authenticated (backend checks as well)
 export function SocketProvider({ children }) {
 	const { user } = useContext(UserContext);
 	const [socket, setSocket] = useState();
@@ -18,9 +20,11 @@ export function SocketProvider({ children }) {
 	useEffect(() => {
 		let newSocket;
 		if (user) {
+			// connect to socket server
 			newSocket = io(SOCKET_SERVER_URL, {
 				query: { userName: user.userName, image: user.image }
 			});
+
 			setSocket(newSocket);
 
 			return () => newSocket.close();

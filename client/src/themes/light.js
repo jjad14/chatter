@@ -1,26 +1,27 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from '@material-ui/core/styles';
 
+// custom light theme
 const lightTheme = createTheme({
 	palette: {
 		primary: {
-			light: "#63a4ff",
-			main: "#1976d2",
-			dark: "#004ba0",
-			contrastText: "#fff"
+			light: '#63a4ff',
+			main: '#1976d2',
+			dark: '#004ba0',
+			contrastText: '#fff'
 		},
 		secondary: {
-			light: "#718792",
-			main: "#455a64",
-			dark: "#1c313a",
-			contrastText: "#ffffff"
+			light: '#718792',
+			main: '#455a64',
+			dark: '#1c313a',
+			contrastText: '#ffffff'
 		},
 		background: {
-			default: "#eeeeee"
+			default: '#eeeeee'
 		},
-		type: "light"
+		type: 'light'
 	},
 	typography: {
-		fontFamily: "Quicksand",
+		fontFamily: 'Quicksand',
 		fontWeightLight: 400,
 		fontWeightRegular: 500,
 		fontWeightMedium: 600,

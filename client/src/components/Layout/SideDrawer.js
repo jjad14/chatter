@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => {
 	};
 });
 
+// Side drawer for auth users, displays default chat rooms and settings
 const SideDrawer = () => {
 	const classes = useStyles();
 	const history = useHistory();
@@ -62,7 +63,7 @@ const SideDrawer = () => {
 
 	const theme = currentTheme === 'lightTheme' ? true : false;
 
-	// TODO: remove once backend works
+	// TODO: Retrieve these from backend
 	const menuItems = [
 		{
 			text: 'General',
@@ -90,9 +91,9 @@ const SideDrawer = () => {
 			path: '/chat/Politics'
 		},
 		{
-			text: 'Video Games',
+			text: 'Games',
 			icon: <SportsEsportsIcon color={theme ? 'primary' : 'inherit'} />,
-			path: '/chat/Videogames'
+			path: '/chat/Games'
 		},
 		{
 			text: 'Music',

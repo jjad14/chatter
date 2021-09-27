@@ -9,12 +9,12 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		position: 'relative',
-		minWidth: '40%',
+		minWidth: '60%',
 		maxWidth: '60%',
 		backgroundColor: (props) =>
 			props.isUser
-				? theme.palette.grey[500]
-				: theme.palette.primary.light,
+				? theme.palette.primary.light
+				: theme.palette.grey[500],
 		float: (props) => (props.isUser ? 'right' : 'left'),
 		margin: theme.spacing(1),
 		[theme.breakpoints.down('sm')]: {
@@ -33,15 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-// single message component
-// receives a single message
-// message has users name, image, content
-// check if its current users
-// display right with grey color if users own message
-// display left if its not their message
-
-// ideally want to have image (rounded), content as a input or label with users name on top
-
+// single image component, to be used for the ChatBox component
 const Message = (props) => {
 	const classes = useStyles(props);
 
@@ -62,7 +54,7 @@ const Message = (props) => {
 						</Typography>
 					</div>
 					<div className={classes.content}>
-						<Typography variant='body2'>{props.content}</Typography>
+						<Typography variant='body1'>{props.content}</Typography>
 					</div>
 				</div>
 			</CardContent>

@@ -7,9 +7,9 @@ Chatter is a chat application that allows users to login and chat with other use
 React with Hooks and Context API
 Material UI
 
-## Available Scripts
-
 ### Client
+
+## Available Scripts
 
 #### npm install
 
@@ -22,10 +22,10 @@ Express
 MongoDB
 Socket.IO
 
-## Available Scripts
-
 ### Server
+
+## Available Scripts
 
 #### npm install
 
-#### npm run start
+#### npm run server

@@ -5,10 +5,10 @@ Express
 MongoDB
 Socket.IO
 
-## Available Scripts
-
 ### Server
+
+## Available Scripts
 
 #### npm install
 
-#### npm run start
+#### npm run server

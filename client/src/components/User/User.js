@@ -4,7 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-// recieves username, image, id
+// recieves a single user to be displayed in userlist (username, image, id)
 const User = ({ user }) => {
 	return (
 		<ListItem button divider alignItems='flex-start'>

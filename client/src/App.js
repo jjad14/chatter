@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import api from './utils/api';
 import { UserContext } from './contexts/UserContext';
 import { SocketProvider } from './contexts/SocketProvider';
+import { ConversationsProvider } from './contexts/ConversationProvider';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -26,14 +27,16 @@ const App = () => {
 
 	return (
 		<UserContext.Provider value={providerValue}>
-			<SocketProvider value={providerValue.user}>
-				{!loading && (
-					<Router>
-						<Layout>
-							<Routes />
-						</Layout>
-					</Router>
-				)}
+			<SocketProvider>
+				<ConversationsProvider>
+					{!loading && (
+						<Router>
+							<Layout>
+								<Routes />
+							</Layout>
+						</Router>
+					)}
+				</ConversationsProvider>
 			</SocketProvider>
 		</UserContext.Provider>
 	);
