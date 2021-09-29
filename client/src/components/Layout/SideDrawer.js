@@ -23,6 +23,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { UserContext } from '../../contexts/UserContext';
 import { CustomThemeContext } from '../../contexts/CustomThemeProvider';
+import { useConversations } from '../../contexts/ConversationProvider';
 
 // If changing, must change it also in NavBar.js
 const drawerWidth = 240;
@@ -60,6 +61,7 @@ const SideDrawer = () => {
 
 	const { user } = useContext(UserContext);
 	const { currentTheme } = useContext(CustomThemeContext);
+	const { joinConversation } = useConversations();
 
 	const theme = currentTheme === 'lightTheme' ? true : false;
 
@@ -107,6 +109,14 @@ const SideDrawer = () => {
 		}
 	];
 
+	const defaultRoomHandler = (room, path) => {
+		joinConversation(room)
+			.then(() => history.push(path))
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	return (
 		<Drawer
 			className={classes.drawer}
@@ -131,7 +141,7 @@ const SideDrawer = () => {
 						key={item.text}
 						button
 						disabled={user === null}
-						onClick={() => history.push(item.path)}
+						onClick={() => defaultRoomHandler(item.text, item.path)}
 						className={
 							location.pathname === item.path
 								? classes.active

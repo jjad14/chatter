@@ -52,12 +52,16 @@ app.use(sessionMiddleware);
 
 let users = [];
 
-// {
-//     // id: uuidV4(),
-//     content: `Welcome to the General chat room!!`,
-//     to: 'General',
-//     sender: 'Chatter-Bot'
-// }
+const defaultRooms = [
+	'General',
+	'Sports',
+	'Movies',
+	'Books',
+	'Politics',
+	'Games',
+	'Music',
+	'Technology'
+];
 
 const messages = {
 	General: [],
@@ -81,26 +85,58 @@ io.on('connection', (socket) => {
 
 	users.push(user);
 
+	// join a room
 	socket.on('join-room', async (roomName, cb) => {
-		// join the room
-		socket.join(roomName);
+		if (messages[roomName]) {
+			const rooms = socket.rooms;
 
-		// emit new user to all users in that chat room
-		socket.to(roomName).emit('new-user', user);
+			// users can only join one room at a time, remove user from any existing room they are in before joining a new one
+			rooms.forEach(function (room) {
+				socket.to(room).emit('user-left', socket.id);
+				socket.leave(room);
+			});
 
-		// get all sockets in that room
-		const sockets = await io.in(roomName).fetchSockets();
+			// join the room
+			socket.join(roomName);
 
-		const usersInRoom = users.filter((u) =>
-			sockets.some((s) => u.id === s.id)
-		);
+			// emit new user to all users in that chat room
+			socket.to(roomName).emit('new-user', user);
 
-		// return messages of that room to user
-		const m = [...messages[roomName]];
+			// get all sockets in that room
+			const sockets = await io.in(roomName).fetchSockets();
 
-		cb(messages[roomName], usersInRoom);
+			// get all users in a room using the sockets
+			const usersInRoom = users.filter((u) =>
+				sockets.some((s) => u.id === s.id)
+			);
+
+			cb(null, { messages: messages[roomName], users: usersInRoom });
+		} else {
+			// room does not exist
+			const error = new Error('Room does not exist');
+			cb(error.toString());
+		}
 	});
 
+	// create a room
+	socket.on('create-room', (roomName, cb) => {
+		// check if room does not exist,
+		if (!messages[roomName]) {
+			// create room
+			messages[roomName] = [];
+
+			// join room
+			socket.join(roomName);
+
+			cb(null, { messages: messages[roomName], users: [] });
+		} else {
+			// room exists - return error
+			const error = new Error('Room already exists');
+			cb(error.toString());
+		}
+	});
+
+	// send a message
 	socket.on('send-message', ({ content, to, sender, image }) => {
 		// message to chat room
 		const payload = {
@@ -121,11 +157,31 @@ io.on('connection', (socket) => {
 		}
 	});
 
+	// TODO: remove user from userlist when they leave chatroom
+	// check if room is empty - if so remove from array
+	// can change name to 'leave-room'
+	socket.on('unsubscribe', async (roomName, cb) => {
+		try {
+			console.log('[socket]', 'leave room :', roomName);
+			socket.broadcast.to(roomName).emit('user-left', socket.id);
+
+			const users = await io.in(roomName).fetchSockets();
+
+			// delete room if not users are currently in, unless its a default room
+			if (users.length === 1 && !defaultRooms.includes(roomName)) {
+				// remove room
+				console.log(`${roomName} deleted`);
+				delete messages[roomName];
+			}
+		} catch (e) {
+			console.log('[error]', 'leave room :', e);
+			socket.emit('error', 'couldnt perform requested action');
+		}
+	});
+
 	socket.on('disconnecting', function () {
 		const self = this;
 		const rooms = Object.keys(self.rooms);
-
-		console.log(rooms);
 
 		rooms.forEach(function (room) {
 			self.to(room).emit('user-leave', self.id);
@@ -135,8 +191,6 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', () => {
 		// filter out user
 		users = users.filter((u) => u.id !== socket.id);
-
-		// socket.broadcast.to(roomName).emit('user-leave', socket.id);
 	});
 });
 

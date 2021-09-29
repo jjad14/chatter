@@ -56,7 +56,7 @@ export function ConversationsProvider({ children }) {
 
 	// add user to array in conversation state
 	const removeUserFromConversation = useCallback(
-		({ id }) => {
+		(id) => {
 			// find user by id then remove it from array
 			setConversation((prevConversation) => ({
 				...prevConversation,
@@ -87,20 +87,66 @@ export function ConversationsProvider({ children }) {
 	useEffect(() => {
 		if (socket == null) return;
 
-		socket.on('user-leave', removeUserFromConversation);
+		socket.on('user-left', removeUserFromConversation);
 
-		return () => socket.off('user-leave');
+		return () => socket.off('user-left');
 	}, [socket, removeUserFromConversation]);
 
 	// join a room by emitting event to server
 	const joinConversation = (roomName) => {
 		// join room and get messages and users of that room
-		socket.emit('join-room', roomName, (messages, users) => {
-			setConversation({
-				room: roomName,
-				messages: messages ? [...messages] : [],
-				users: users ? [...users] : []
+		return new Promise(function (resolve, reject) {
+			socket.emit('join-room', roomName, (error, result) => {
+				if (error !== null) {
+					reject(error);
+				} else {
+					setConversation({
+						room: roomName,
+						messages: result.messages ? [...result.messages] : [],
+						users: result.users ? [...result.users] : []
+					});
+
+					resolve();
+				}
 			});
+		});
+	};
+
+	// join a room by emitting event to server
+	const createConversation = (roomName) => {
+		return new Promise(function (resolve, reject) {
+			// create room
+			socket.emit('create-room', roomName, (error, result) => {
+				if (error !== null) {
+					reject(error);
+				} else {
+					setConversation({
+						room: roomName,
+						messages: result.messages ? [...result.messages] : [],
+						users: result.users ? [...result.users] : []
+					});
+
+					resolve();
+				}
+			});
+		});
+	};
+
+	const leaveChatRoom = (roomName) => {
+		socket.emit('unsubscribe', roomName, (error, result) => {
+			setConversation({
+				room: '',
+				messages: [],
+				users: []
+			});
+		});
+	};
+
+	const resetConversation = () => {
+		setConversation({
+			room: '',
+			messages: [],
+			users: []
 		});
 	};
 
@@ -121,6 +167,9 @@ export function ConversationsProvider({ children }) {
 	const value = {
 		conversation,
 		joinConversation,
+		createConversation,
+		leaveChatRoom,
+		resetConversation,
 		sendMessage
 	};
 

@@ -66,6 +66,8 @@ const NavBar = () => {
 				// redirect user to home page
 				history.push('/');
 
+				//TODO: delete token or reset it
+
 				setAnchorEl(false);
 			})
 			.catch((err) => {

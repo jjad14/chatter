@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+
+import { useConversations } from '../../contexts/ConversationProvider';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -65,21 +67,38 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
 	const classes = useStyles();
 
+	const { joinConversation, createConversation, resetConversation } =
+		useConversations();
+
 	const [createdRoom, setCreatedRoom] = useState('');
 	const [joinedRoom, setJoinedRoom] = useState('');
 
 	const history = useHistory();
 
+	useEffect(() => {
+		resetConversation();
+	}, []);
+
 	const createRoomHandler = (e) => {
 		e.preventDefault();
 
-		history.push('/chat?room=' + createdRoom);
+		createConversation(createdRoom)
+			.then(() => history.push('/chat/' + createdRoom))
+			.catch((error) => {
+				setCreatedRoom('');
+				console.log(error);
+			});
 	};
 
 	const joinRoomHandler = (e) => {
 		e.preventDefault();
 
-		history.push('/chat?room=' + joinedRoom);
+		joinConversation(joinedRoom)
+			.then(() => history.push('/chat/' + createdRoom))
+			.catch((error) => {
+				setJoinedRoom('');
+				console.log(error);
+			});
 	};
 
 	return (
