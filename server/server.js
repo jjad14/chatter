@@ -162,30 +162,35 @@ io.on('connection', (socket) => {
 	// can change name to 'leave-room'
 	socket.on('unsubscribe', async (roomName, cb) => {
 		try {
-			console.log('[socket]', 'leave room :', roomName);
 			socket.broadcast.to(roomName).emit('user-left', socket.id);
 
 			const users = await io.in(roomName).fetchSockets();
 
-			// delete room if not users are currently in, unless its a default room
+			// delete room if it is empty and not a default room
 			if (users.length === 1 && !defaultRooms.includes(roomName)) {
 				// remove room
-				console.log(`${roomName} deleted`);
 				delete messages[roomName];
+			}
+
+			// reset messages in default room if no one is in there
+			if (users.length === 1 && defaultRooms.includes(roomName)) {
+				messages[roomName] = [];
 			}
 		} catch (e) {
 			console.log('[error]', 'leave room :', e);
-			socket.emit('error', 'couldnt perform requested action');
 		}
 	});
 
-	socket.on('disconnecting', function () {
+	socket.on('disconnecting', () => {
 		const self = this;
-		const rooms = Object.keys(self.rooms);
 
-		rooms.forEach(function (room) {
-			self.to(room).emit('user-leave', self.id);
-		});
+		if (self) {
+			const rooms = Object.keys(self.rooms);
+
+			rooms.forEach(function (room) {
+				self.to(room).emit('user-left', self.id);
+			});
+		}
 	});
 
 	socket.on('disconnect', () => {

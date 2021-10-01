@@ -4,11 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import VideocamIcon from '@mui/icons-material/Videocam';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import CreateIcon from '@mui/icons-material/Create';
-import LoginIcon from '@mui/icons-material/Login';
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
@@ -27,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 		}
 	},
 	text: {
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: '#fff',
+		textShadow: '0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black'
 	},
 	cards: {
 		[theme.breakpoints.up('md')]: {
@@ -63,20 +60,21 @@ const LandingPage = () => {
 					gutterBottom>
 					Chatter, meet new people, share and laugh.
 				</Typography>
+			</div>
+			<div>
 				<Typography
 					className={classes.text}
 					color='textPrimary'
 					variant='h4'
 					align='center'
 					gutterBottom>
-					Join or create your own room today! Login to start
-					chattering now!
+					Join or create your own room today! Create an account to
+					start chattering now!
 				</Typography>
 			</div>
 			<div className={classes.cards}>
 				<Card className={classes.card}>
 					<CardContent>
-						<CreateIcon />
 						<Typography
 							color='textPrimary'
 							variant='h6'
@@ -88,19 +86,6 @@ const LandingPage = () => {
 				</Card>
 				<Card className={classes.card}>
 					<CardContent>
-						<LoginIcon />
-						<Typography
-							color='textPrimary'
-							variant='h6'
-							align='center'
-							gutterBottom>
-							Join an Existing Room
-						</Typography>
-					</CardContent>
-				</Card>
-				<Card className={classes.card}>
-					<CardContent>
-						<QuestionAnswerIcon />
 						<Typography
 							color='textPrimary'
 							variant='h6'
@@ -112,7 +97,6 @@ const LandingPage = () => {
 				</Card>
 				<Card className={classes.card}>
 					<CardContent>
-						<VideocamIcon fontSize='large' />
 						<Typography
 							color='textPrimary'
 							variant='h6'

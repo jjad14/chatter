@@ -21,14 +21,16 @@ const useStyles = makeStyles((theme) => ({
 		backgroundPosition: '25% 75%',
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
-		opacity: '0.8',
+		opacity: '0.9',
 		minHeight: '100%'
 	},
 	bannerContent: {
 		padding: theme.spacing(5)
 	},
 	text: {
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: '#fff',
+		textShadow: '0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black'
 	},
 	message: {
 		[theme.breakpoints.down('sm')]: {
@@ -77,6 +79,7 @@ const Home = () => {
 
 	useEffect(() => {
 		resetConversation();
+		// eslint-disable-next-line
 	}, []);
 
 	const createRoomHandler = (e) => {

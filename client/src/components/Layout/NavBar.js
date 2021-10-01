@@ -12,6 +12,10 @@ import Menu from '@material-ui/core/Menu';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 
+import InboxIcon from '@material-ui/icons/Inbox';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import api from '../../utils/api';
 import { UserContext } from '../../contexts/UserContext';
 
@@ -130,12 +134,19 @@ const NavBar = () => {
 									component={RouterLink}
 									to='/profile'
 									color='inherit'>
-									Profile
+									<AccountCircleIcon /> Profile
+								</MenuItem>
+								<MenuItem
+									onClick={handleClose}
+									component={RouterLink}
+									to='/profile'
+									color='inherit'>
+									<InboxIcon /> Inbox
 								</MenuItem>
 								<MenuItem
 									onClick={handleLogout}
 									component='button'>
-									Logout
+									<ExitToAppIcon /> Logout
 								</MenuItem>
 							</Menu>
 						</>

@@ -11,11 +11,14 @@ export function useConversations() {
 
 // Emit
 // join-room  ->  pass room name and cb
+// create-room  -> pass room name and cb
 // send-message  ->  pass content, to, sender, image
+// unsubscribe -> pass room name
 
-// listen
+// Listen
 // new-user  ->  recieve new user, add to state
 // new-message  ->  recieve new message, add to state
+// user-left -> recieve socket id
 
 // context stores the result of emits and also listens to socket events
 export function ConversationsProvider({ children }) {
@@ -160,8 +163,6 @@ export function ConversationsProvider({ children }) {
 		};
 
 		socket.emit('send-message', newMessage);
-
-		addMessageToConversation(newMessage);
 	};
 
 	const value = {

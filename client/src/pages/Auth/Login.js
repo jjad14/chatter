@@ -81,7 +81,7 @@ const Login = () => {
 					history.push('/home');
 				})
 				.catch((err) => {
-					// console.log(err);
+					console.log(err.toString());
 				});
 		}
 	};
