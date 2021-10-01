@@ -16,15 +16,14 @@ import { CustomThemeContext } from '../../contexts/CustomThemeProvider';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
-		marginTop: theme.spacing(5),
-		paddingTop: theme.spacing(2),
-		paddingBottom: theme.spacing(2),
 		display: 'flex',
 		flexDirection: 'column',
-		alignItems: 'center'
+		alignItems: 'center',
+		marginTop: theme.spacing(5),
+		paddingTop: theme.spacing(2),
+		paddingBottom: theme.spacing(2)
 	},
 	form: {
-		width: '50vh',
 		marginTop: theme.spacing(1)
 	},
 	submit: {

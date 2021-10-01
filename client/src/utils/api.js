@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// axios instance
+// shared axios instance
 const api = axios.create({
 	baseURL: '/api',
 	headers: {

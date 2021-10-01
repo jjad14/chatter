@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center'
 	},
 	form: {
-		width: '50vh',
 		marginTop: theme.spacing(1)
 	},
 	inputImage: {

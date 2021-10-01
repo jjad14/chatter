@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 // prefix for all localstorage items
 const PREFIX = 'chatter-';
 
-// custom hook to store state in localstorage, update when the state changes
-// retrieves localstorage and parses for us
+// custom hook to store and retrieve state from localstorage, updates when the state changes
 export default function useLocalStorage(key, initialValue) {
 	const prefixedKey = PREFIX + key;
 
